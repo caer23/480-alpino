@@ -12,6 +12,7 @@ class NavbarComponent {
 
     init() {
         this.render();
+        this.setupLogoFallback();
         this.setupListeners();
         this.updateCartCount();
         
@@ -24,7 +25,8 @@ class NavbarComponent {
             <div class="container">
                 <div class="nav-content">
                     <div class="logo">
-                        <img src="styles/main-logo.png" alt="480 Alpino Logo" height="60">
+                        <img class="logo-img" src="styles/main-logo.png" alt="480 Alpino Logo" height="60">
+                        <span class="logo-fallback" aria-label="480 Alpino">480 Alpino</span>
                     </div>
                     <nav class="nav-menu">
                         <a href="#inicio" class="nav-link">INICIO</a>
@@ -64,6 +66,28 @@ class NavbarComponent {
             </div>
         `;
         this.container.innerHTML = html;
+    }
+
+    setupLogoFallback() {
+        const logoImg = this.container?.querySelector('.logo-img');
+        const logoFallback = this.container?.querySelector('.logo-fallback');
+
+        if (!logoImg || !logoFallback) return;
+
+        const showFallback = () => {
+            logoImg.style.display = 'none';
+            logoFallback.style.display = 'inline-block';
+        };
+
+        logoFallback.style.display = 'none';
+
+        // If the browser has already resolved the image and it is broken, switch immediately.
+        if (logoImg.complete && logoImg.naturalWidth === 0) {
+            showFallback();
+            return;
+        }
+
+        logoImg.addEventListener('error', showFallback);
     }
 
     setupListeners() {
