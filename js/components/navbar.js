@@ -24,10 +24,7 @@ class NavbarComponent {
             <div class="container">
                 <div class="nav-content">
                     <div class="logo">
-                        <svg width="60" height="60" viewBox="0 0 100 100" fill="none">
-                            <path d="M50 10 L90 90 L55 90 L50 75 L45 90 L10 90 Z" stroke="#E8D5C4" stroke-width="3" fill="none"/>
-                            <text x="50" y="65" font-size="45" font-weight="bold" text-anchor="middle" fill="#E8D5C4">480</text>
-                        </svg>
+                        <img src="styles/main-logo.png" alt="480 Alpino Logo" height="60">
                     </div>
                     <nav class="nav-menu">
                         <a href="#inicio" class="nav-link">INICIO</a>
