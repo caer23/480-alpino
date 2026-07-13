@@ -1,4 +1,4 @@
-# 480 Alpino - Ecommerce de Equipamiento de Nieve
+# Cota 480 - Ecommerce de Equipamiento de Nieve
 
 Tienda online especializada en compra y venta de artículos premium para deportes de nieve.
 

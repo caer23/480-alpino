@@ -6,7 +6,7 @@
 class NavbarComponent {
     constructor() {
         this.container = getElement('#navbar');
-        this.cartCount = 0;
+        this.desktopBreakpoint = 768;
         this.init();
     }
 
@@ -14,58 +14,250 @@ class NavbarComponent {
         this.render();
         this.setupLogoFallback();
         this.setupListeners();
-        this.updateCartCount();
-        
-        // Suscribirse a cambios del carrito
-        carritoService.suscribirse(() => this.updateCartCount());
+        this.setupDropdownResponsiveness();
     }
 
     render() {
+        const menuData = this.getMegaMenuData();
+        const menuHtml = menuData
+            .map((item, index) => this.renderMegaMenuItem(item, index, menuData.length))
+            .join('');
+
         const html = `
             <div class="container">
                 <div class="nav-content">
                     <div class="logo">
-                        <img class="logo-img" src="styles/main-logo.png" alt="480 Alpino Logo" height="60">
-                        <span class="logo-fallback" aria-label="480 Alpino">480 Alpino</span>
+                        <img class="logo-img" src="styles/main-logo.png" alt="Cota 480 Logo" height="60">
+                        <span class="logo-fallback" aria-label="Cota 480">Cota 480</span>
                     </div>
-                    <nav class="nav-menu">
-                        <a href="#inicio" class="nav-link">INICIO</a>
-                        <a href="#hardware" class="nav-link">HARDWARE</a>
-                        <a href="#tecnologia" class="nav-link">TECNOLOGÍA</a>
-                        <a href="#optica" class="nav-link">ÓPTICA</a>
-                        <a href="#mas" class="nav-link">MAS</a>
+                    <button class="hamburger-btn" id="mobileMenuBtn" type="button" aria-expanded="false" aria-controls="mainNavMenu" aria-label="Abrir menu de categorias">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                    <nav class="nav-menu" id="mainNavMenu" aria-label="Categorias principales">
+                        ${menuHtml}
+                        <div class="nav-menu-actions">
+                            <button class="action-btn" type="button">Vende</button>
+                            <button class="action-btn" type="button">Ingresa</button>
+                        </div>
                     </nav>
                     <div class="nav-right">
-                        <div class="search-bar">
-                            <input type="text" id="searchInput" placeholder="BUSCAR PRODUCTOS" class="search-input">
-                            <button class="search-btn">🔍</button>
-                        </div>
-                        <div class="user-section">
-                            <input type="text" placeholder="User Name" class="input-user">
-                            <input type="email" placeholder="Email. Cliente" class="input-email">
-                        </div>
-                        <div class="cart-icon" id="cartIcon">
-                            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#E8D5C4" stroke-width="2">
-                                <circle cx="9" cy="21" r="1"/>
-                                <circle cx="20" cy="21" r="1"/>
-                                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
-                            </svg>
-                            <span class="cart-count" id="cartCount">0</span>
-                        </div>
+                        <button class="action-btn" type="button">Vende</button>
+                        <button class="action-btn" type="button">Ingresa</button>
                     </div>
-                </div>
-            </div>
-            <div class="subnavbar">
-                <div class="container">
-                    <a href="#celurino" class="subnavbar-link">CELURINO</a>
-                    <a href="#oroete" class="subnavbar-link">OROETE</a>
-                    <a href="#recuia" class="subnavbar-link">RECUIA</a>
-                    <a href="#ecliparmabas" class="subnavbar-link">ECLIPARMABAS</a>
-                    <a href="#buscinas" class="subnavbar-link">BUSCINAS</a>
                 </div>
             </div>
         `;
         this.container.innerHTML = html;
+    }
+
+    getMegaMenuData() {
+        return [
+            {
+                label: 'Ski',
+                href: '#ski',
+                shopAll: 'Ver todo Ski',
+                columns: [
+                    {
+                        title: 'Equipo',
+                        links: ['Skis', 'Botas de Ski', 'Fijaciones', 'Bastones', 'Paquetes de Ski']
+                    },
+                    {
+                        title: 'Aventura',
+                        links: ['Backcountry', 'Freeride', 'All Mountain', 'Pistas', 'Junior']
+                    },
+                    {
+                        title: 'Accesorios',
+                        links: ['Cascos', 'Goggles', 'Bolsas y Mochilas', 'Guantes', 'Protecciones']
+                    }
+                ],
+                featured: [
+                    { title: 'Novedades 2027', subtitle: 'Descubre la nueva temporada', cta: 'Explorar' },
+                    { title: 'Top Paquetes', subtitle: 'Kits completos listos para nieve', cta: 'Comprar ahora' }
+                ]
+            },
+            {
+                label: 'Snowboard',
+                href: '#snowboard',
+                shopAll: 'Ver todo Snowboard',
+                columns: [
+                    {
+                        title: 'Equipo',
+                        links: ['Tablas', 'Botas', 'Fijaciones', 'Paquetes de Snowboard', 'Splitboard']
+                    },
+                    {
+                        title: 'Riding',
+                        links: ['Freestyle', 'Freeride', 'All Mountain', 'Park', 'Backcountry']
+                    },
+                    {
+                        title: 'Accesorios',
+                        links: ['Bolsas', 'Cascos', 'Goggles', 'Guantes', 'Ropa Técnica']
+                    }
+                ],
+                featured: [
+                    { title: 'Nuevas Tablas', subtitle: 'Modelos pro para esta temporada', cta: 'Ver modelos' },
+                    { title: 'Setups Recomendados', subtitle: 'Tabla + fijas + botas', cta: 'Armar setup' }
+                ]
+            },
+            {
+                label: 'Hombre',
+                href: '#hombre',
+                shopAll: 'Ver todo Hombre',
+                columns: [
+                    {
+                        title: 'Ropa',
+                        links: ['Chaquetas', 'Pantalones', 'Primera Capa', 'Sudaderas', 'Camisetas']
+                    },
+                    {
+                        title: 'Calzado',
+                        links: ['Botas de Nieve', 'Après-Ski', 'Trail', 'Sneakers Outdoor', 'Sandalias']
+                    },
+                    {
+                        title: 'Accesorios',
+                        links: ['Gorros', 'Guantes', 'Calcetines', 'Mochilas', 'Lentes']
+                    }
+                ],
+                featured: [
+                    { title: 'Looks de Montaña', subtitle: 'Capas listas para clima extremo', cta: 'Ver outfit' },
+                    { title: 'Esenciales', subtitle: 'Lo más buscado por riders', cta: 'Comprar top' }
+                ]
+            },
+            {
+                label: 'Mujer',
+                href: '#mujer',
+                shopAll: 'Ver todo Mujer',
+                columns: [
+                    {
+                        title: 'Ropa',
+                        links: ['Chaquetas', 'Pantalones', 'Primera Capa', 'Fleece', 'Tops Técnicos']
+                    },
+                    {
+                        title: 'Calzado',
+                        links: ['Botas de Nieve', 'Après-Ski', 'Trail', 'Outdoor Casual', 'Sandalias']
+                    },
+                    {
+                        title: 'Accesorios',
+                        links: ['Gorros', 'Guantes', 'Calcetines', 'Mochilas', 'Lentes']
+                    }
+                ],
+                featured: [
+                    { title: 'Colección Alpina', subtitle: 'Diseño técnico con estilo', cta: 'Descubrir' },
+                    { title: 'Favoritos', subtitle: 'Selección curada de temporada', cta: 'Ir a favoritos' }
+                ]
+            },
+            {
+                label: 'Kids',
+                href: '#kids',
+                shopAll: 'Ver todo Kids',
+                columns: [
+                    {
+                        title: 'Ski Kids',
+                        links: ['Skis Junior', 'Botas Junior', 'Cascos', 'Goggles', 'Protecciones']
+                    },
+                    {
+                        title: 'Snowboard Kids',
+                        links: ['Tablas Junior', 'Botas Junior', 'Fijaciones', 'Ropa', 'Accesorios']
+                    },
+                    {
+                        title: 'Outdoor',
+                        links: ['Chaquetas', 'Pantalones', 'Primeras Capas', 'Calzado', 'Mochilas']
+                    }
+                ],
+                featured: [
+                    { title: 'Junior Essentials', subtitle: 'Todo para empezar fuerte', cta: 'Ver esenciales' },
+                    { title: 'Tallas por Edad', subtitle: 'Encuentra ajuste perfecto', cta: 'Elegir talla' }
+                ]
+            },
+            {
+                label: 'Marcas',
+                href: '#marcas',
+                shopAll: 'Ver todas las Marcas',
+                columns: [
+                    {
+                        title: 'Ski & Snow',
+                        links: ['Salomon', 'Atomic', 'Rossignol', 'K2', 'Burton']
+                    },
+                    {
+                        title: 'Outdoor',
+                        links: ['The North Face', 'Patagonia', 'Arc\'teryx', 'Oakley', 'Volcom']
+                    },
+                    {
+                        title: 'Por Estilo',
+                        links: ['Performance', 'Freestyle', 'Backcountry', 'Urban Outdoor', 'Junior']
+                    }
+                ],
+                featured: [
+                    { title: 'Marcas Premium', subtitle: 'Las favoritas del equipo Cota 480', cta: 'Ver marcas' },
+                    { title: 'Nuevos ingresos', subtitle: 'Catálogo recién llegado', cta: 'Explorar' }
+                ]
+            },
+            {
+                label: 'Ofertas',
+                href: '#ofertas',
+                shopAll: 'Ver todas las Ofertas',
+                columns: [
+                    {
+                        title: 'Por Categoría',
+                        links: ['Ski Sale', 'Snowboard Sale', 'Ropa Sale', 'Calzado Sale', 'Accesorios Sale']
+                    },
+                    {
+                        title: 'Por Perfil',
+                        links: ['Hombre', 'Mujer', 'Kids', 'Backcountry', 'Urban']
+                    },
+                    {
+                        title: 'Ayuda',
+                        links: ['Últimas Tallas', 'Fin de Temporada', 'Packs con Descuento', '2x1 Seleccionado', 'Outlet']
+                    }
+                ],
+                featured: [
+                    { title: 'Hasta 50% OFF', subtitle: 'Selección especial de temporada', cta: 'Ir a ofertas' },
+                    { title: 'Flash Deals', subtitle: 'Promos por tiempo limitado', cta: 'Ver ahora' }
+                ],
+                danger: true
+            }
+        ];
+    }
+
+    renderMegaMenuItem(item, index, totalItems) {
+        const alignRightClass = index >= totalItems - 2 ? 'align-right' : '';
+
+        const columnsHtml = item.columns
+            .map((column) => `
+                <div class="mega-column">
+                    <h4>${column.title}</h4>
+                    ${column.links.map((linkText) => `<a href="${item.href}" class="mega-link">${linkText}</a>`).join('')}
+                </div>
+            `)
+            .join('');
+
+        const featuredHtml = item.featured
+            .map((feature) => `
+                <a href="${item.href}" class="mega-feature-card">
+                    <span class="mega-feature-title">${feature.title}</span>
+                    <span class="mega-feature-subtitle">${feature.subtitle}</span>
+                    <span class="mega-feature-cta">${feature.cta}</span>
+                </a>
+            `)
+            .join('');
+
+        return `
+            <div class="menu-item has-dropdown ${alignRightClass} ${item.danger ? 'is-danger' : ''}">
+                <button class="nav-link nav-trigger" type="button" aria-expanded="false">
+                    ${item.label}
+                    <span class="caret" aria-hidden="true">▾</span>
+                </button>
+                <div class="mega-dropdown" role="menu">
+                    <div class="mega-top">
+                        <a href="${item.href}" class="mega-shop-all">${item.shopAll}</a>
+                    </div>
+                    <div class="mega-grid">
+                        ${columnsHtml}
+                        <div class="mega-featured">${featuredHtml}</div>
+                    </div>
+                </div>
+            </div>
+        `;
     }
 
     setupLogoFallback() {
@@ -91,63 +283,145 @@ class NavbarComponent {
     }
 
     setupListeners() {
-        const searchBtn = getElement('.search-btn');
-        const searchInput = getElement('#searchInput');
-        const cartIcon = getElement('#cartIcon');
+        const mobileMenuBtn = getElement('#mobileMenuBtn');
+        const navMenu = getElement('#mainNavMenu');
 
-        // Búsqueda
-        if (searchBtn) {
-            searchBtn.addEventListener('click', () => this.handleSearch());
-        }
-        if (searchInput) {
-            searchInput.addEventListener('keypress', (e) => {
-                if (e.key === 'Enter') this.handleSearch();
-            });
-        }
-
-        // Carrito
-        if (cartIcon) {
-            cartIcon.addEventListener('click', () => {
-                const event = new CustomEvent('openCart');
-                document.dispatchEvent(event);
-            });
-        }
-
-        // Links de navegación
-        getElements('.nav-link').forEach(link => {
-            link.addEventListener('click', (e) => {
+        if (mobileMenuBtn && navMenu) {
+            mobileMenuBtn.addEventListener('click', (e) => {
                 e.preventDefault();
-                const href = link.getAttribute('href');
-                smoothScroll(href);
+                e.stopPropagation();
+                this.toggleMobileMenu();
             });
+        }
+
+        // Dropdowns estilo mega menú (hover en desktop, click en touch/mobile).
+        getElements('.nav-trigger').forEach(trigger => {
+            trigger.addEventListener('click', (e) => {
+                const menuItem = trigger.closest('.menu-item');
+                const shouldOpen = !menuItem.classList.contains('open');
+                e.preventDefault();
+
+                this.closeAllDropdowns();
+                if (shouldOpen) {
+                    this.positionSingleDropdown(menuItem);
+                    menuItem.classList.add('open');
+                    trigger.setAttribute('aria-expanded', 'true');
+                }
+            });
+
+            trigger.addEventListener('mouseenter', () => {
+                const menuItem = trigger.closest('.menu-item');
+                this.positionSingleDropdown(menuItem);
+            });
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!this.container.contains(e.target)) {
+                this.closeAllDropdowns();
+                this.closeMobileMenu();
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                this.closeAllDropdowns();
+                this.closeMobileMenu();
+            }
         });
     }
 
-    handleSearch() {
-        const searchInput = getElement('#searchInput');
-        if (searchInput) {
-            const termino = searchInput.value.trim();
-            if (termino) {
-                searchService.buscar(termino);
-                const event = new CustomEvent('openSearch');
-                document.dispatchEvent(event);
-            } else {
-                NotificacionesComponent.mostrar(MENSAJES.BUSQUEDA_VACIA, 'warning');
+    setupDropdownResponsiveness() {
+        const runPositioning = () => {
+            this.positionAllDropdowns();
+
+            // Ensure mobile menu state does not leak into desktop layout.
+            if (window.innerWidth > this.desktopBreakpoint) {
+                this.closeMobileMenu();
             }
+        };
+
+        runPositioning();
+        window.addEventListener('resize', runPositioning);
+        window.addEventListener('orientationchange', runPositioning);
+    }
+
+    positionAllDropdowns() {
+        getElements('.menu-item.has-dropdown').forEach((menuItem) => {
+            this.positionSingleDropdown(menuItem);
+        });
+    }
+
+    positionSingleDropdown(menuItem) {
+        if (!menuItem) return;
+
+        const dropdown = menuItem.querySelector('.mega-dropdown');
+        if (!dropdown) return;
+
+        const isMobile = window.innerWidth <= this.desktopBreakpoint;
+        if (isMobile) {
+            dropdown.style.left = '';
+            dropdown.style.right = '';
+            dropdown.style.width = '';
+            dropdown.style.maxWidth = '';
+            return;
+        }
+
+        const viewportPadding = 12;
+        const maxDropdownWidth = Math.max(320, Math.min(920, window.innerWidth - viewportPadding * 2));
+
+        // Normalize anchor before measuring and then shift within viewport bounds.
+        dropdown.style.right = 'auto';
+        dropdown.style.left = '0px';
+        dropdown.style.width = `${maxDropdownWidth}px`;
+        dropdown.style.maxWidth = `${maxDropdownWidth}px`;
+
+        const itemRect = menuItem.getBoundingClientRect();
+        let leftOffset = 0;
+
+        const overflowRight = itemRect.left + maxDropdownWidth - (window.innerWidth - viewportPadding);
+        if (overflowRight > 0) {
+            leftOffset -= overflowRight;
+        }
+
+        const overflowLeft = itemRect.left + leftOffset - viewportPadding;
+        if (overflowLeft < 0) {
+            leftOffset += Math.abs(overflowLeft);
+        }
+
+        dropdown.style.left = `${Math.round(leftOffset)}px`;
+    }
+
+    closeAllDropdowns() {
+        getElements('.menu-item.open').forEach(item => {
+            item.classList.remove('open');
+            const trigger = item.querySelector('.nav-trigger');
+            if (trigger) trigger.setAttribute('aria-expanded', 'false');
+        });
+    }
+
+    toggleMobileMenu() {
+        const navMenu = getElement('#mainNavMenu');
+        const mobileMenuBtn = getElement('#mobileMenuBtn');
+        if (!navMenu || !mobileMenuBtn) return;
+
+        const isOpen = navMenu.classList.toggle('mobile-open');
+        mobileMenuBtn.classList.toggle('is-active', isOpen);
+        mobileMenuBtn.setAttribute('aria-expanded', String(isOpen));
+        mobileMenuBtn.setAttribute('aria-label', isOpen ? 'Cerrar menu de categorias' : 'Abrir menu de categorias');
+
+        if (!isOpen) {
+            this.closeAllDropdowns();
         }
     }
 
-    updateCartCount() {
-        const count = carritoService.obtenerCantidadTotal();
-        const cartCountElement = getElement('#cartCount');
-        if (cartCountElement) {
-            cartCountElement.textContent = count;
-            if (count > 0) {
-                addClass(cartCountElement, 'active');
-            } else {
-                removeClass(cartCountElement, 'active');
-            }
-        }
+    closeMobileMenu() {
+        const navMenu = getElement('#mainNavMenu');
+        const mobileMenuBtn = getElement('#mobileMenuBtn');
+        if (!navMenu || !mobileMenuBtn) return;
+
+        navMenu.classList.remove('mobile-open');
+        mobileMenuBtn.classList.remove('is-active');
+        mobileMenuBtn.setAttribute('aria-expanded', 'false');
     }
 }
 

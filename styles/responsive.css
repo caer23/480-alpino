@@ -9,41 +9,9 @@
     }
 
     .nav-content {
-        flex-wrap: wrap;
-        gap: 10px;
+        gap: 14px;
     }
 
-    .nav-menu {
-        order: 3;
-        width: 100%;
-        gap: 10px;
-        flex-direction: column;
-        font-size: 12px;
-    }
-
-    .nav-right {
-        order: 2;
-        flex-wrap: wrap;
-        gap: 10px;
-    }
-
-    .search-bar {
-        order: 4;
-        width: 100%;
-    }
-
-    .search-input {
-        width: 100%;
-    }
-
-    .user-section {
-        gap: 5px;
-    }
-
-    .input-user,
-    .input-email {
-        width: 100%;
-    }
 
     .hero h1 {
         font-size: 36px;
@@ -99,28 +67,14 @@
         padding: 0 10px;
     }
 
-    .logo svg {
+    .logo svg,
+    .logo img {
         width: 40px;
         height: 40px;
     }
 
-    .nav-menu {
-        gap: 5px;
-    }
-
     .nav-link {
         font-size: 11px;
-    }
-
-    .search-input {
-        width: 100% !important;
-    }
-
-    .input-user,
-    .input-email {
-        width: 100% !important;
-        padding: 6px 8px;
-        font-size: 10px;
     }
 
     .cart-count {

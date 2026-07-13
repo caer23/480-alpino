@@ -28,7 +28,11 @@ class HeroComponent {
 
         const html = `
             <div class="hero-content">
-                <h1>EL INVIERNO EMPIEZA<br>EN 480 ALPINO.</h1>
+                <h1>EL INVIERNO EMPIEZA<br>EN COTA 480</h1>
+                <div class="hero-search" role="search" aria-label="Busqueda de productos">
+                    <input type="text" id="heroSearchInput" placeholder="BUSCAR PRODUCTOS" class="hero-search-input">
+                    <button class="hero-search-btn" id="heroSearchBtn" type="button">Buscar</button>
+                </div>
                 <button class="btn-primary" id="verEquipamientoBtm">VER EQUIPAMIENTO.</button>
             </div>
             <div class="hero-products">
@@ -48,6 +52,18 @@ class HeroComponent {
             });
         }
 
+        // Busqueda desde hero
+        const searchBtn = getElement('#heroSearchBtn');
+        const searchInput = getElement('#heroSearchInput');
+        if (searchBtn) {
+            searchBtn.addEventListener('click', () => this.handleSearch());
+        }
+        if (searchInput) {
+            searchInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') this.handleSearch();
+            });
+        }
+
         // Botones de agregar al carrito
         getElements('.hero-products .btn-add').forEach(btn => {
             btn.addEventListener('click', (e) => {
@@ -59,6 +75,20 @@ class HeroComponent {
                 }
             });
         });
+    }
+
+    handleSearch() {
+        const searchInput = getElement('#heroSearchInput');
+        if (searchInput) {
+            const termino = searchInput.value.trim();
+            if (termino) {
+                searchService.buscar(termino);
+                const event = new CustomEvent('openSearch');
+                document.dispatchEvent(event);
+            } else {
+                NotificacionesComponent.mostrar(MENSAJES.BUSQUEDA_VACIA, 'warning');
+            }
+        }
     }
 }
 

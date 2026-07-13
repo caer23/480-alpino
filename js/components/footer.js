@@ -19,7 +19,7 @@ class FooterComponent {
             <div class="container">
                 <div class="footer-content">
                     <div class="footer-section">
-                        <h4>480 ALPINO</h4>
+                        <h4>COTA 480</h4>
                         <p>Equipamiento premium para los amantes del invierno y la nieve.</p>
                     </div>
                     <div class="footer-section">
@@ -51,7 +51,7 @@ class FooterComponent {
                     </div>
                 </div>
                 <div class="footer-bottom">
-                    <p>&copy; 2026 480 Alpino. Todos los derechos reservados.</p>
+                    <p>&copy; 2026 Cota 480. Todos los derechos reservados.</p>
                 </div>
             </div>
         `;

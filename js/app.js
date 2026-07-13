@@ -3,7 +3,7 @@
  * Inicialización global y configuración
  */
 
-console.log('🏔️ 480 Alpino - Ecommerce cargado correctamente');
+console.log('🏔️ Cota 480 - Ecommerce cargado correctamente');
 
 // Inicialización cuando todo está listo
 if (document.readyState === 'loading') {
