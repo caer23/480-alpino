@@ -15,6 +15,12 @@ class NavbarComponent {
         this.setupLogoFallback();
         this.setupListeners();
         this.setupDropdownResponsiveness();
+        this.updateCartCount();
+
+        // Reaccionar a cambios en el carrito
+        if (typeof carritoService !== 'undefined') {
+            carritoService.suscribirse(() => this.updateCartCount());
+        }
     }
 
     render() {
@@ -22,6 +28,13 @@ class NavbarComponent {
         const menuHtml = menuData
             .map((item, index) => this.renderMegaMenuItem(item, index, menuData.length))
             .join('');
+
+        const usuario = (typeof authService !== 'undefined') ? authService.obtenerUsuario() : null;
+        const accountBtn = usuario
+            ? `<a href="pages/user-profile.html" class="action-btn action-btn--account" title="${usuario.nombre || 'Mi Cuenta'}">
+                   <span class="account-initial">${(usuario.nombre || 'U')[0].toUpperCase()}</span>
+               </a>`
+            : `<a href="pages/login.html" class="action-btn" type="button">Mi Cuenta</a>`;
 
         const html = `
             <div class="container">
@@ -39,12 +52,18 @@ class NavbarComponent {
                         ${menuHtml}
                         <div class="nav-menu-actions">
                             <button class="action-btn" type="button">Vende</button>
-                            <button class="action-btn" type="button">Ingresa</button>
+                            ${accountBtn}
+                            <button class="action-btn cart-nav-btn" id="mobileCartBtn" type="button" aria-label="Abrir carrito">
+                                🛒 <span class="cart-nav-count" id="mobileCartCount">0</span>
+                            </button>
                         </div>
                     </nav>
                     <div class="nav-right">
                         <button class="action-btn" type="button">Vende</button>
-                        <button class="action-btn" type="button">Ingresa</button>
+                        ${accountBtn}
+                        <button class="action-btn cart-nav-btn" id="cartNavBtn" type="button" aria-label="Abrir carrito">
+                            🛒 <span class="cart-nav-count" id="cartNavCount">0</span>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -294,6 +313,22 @@ class NavbarComponent {
             });
         }
 
+        // Cart buttons
+        const cartNavBtn = getElement('#cartNavBtn');
+        if (cartNavBtn) {
+            cartNavBtn.addEventListener('click', () => {
+                document.dispatchEvent(new CustomEvent('openCart'));
+            });
+        }
+
+        const mobileCartBtn = getElement('#mobileCartBtn');
+        if (mobileCartBtn) {
+            mobileCartBtn.addEventListener('click', () => {
+                this.closeMobileMenu();
+                document.dispatchEvent(new CustomEvent('openCart'));
+            });
+        }
+
         // Dropdowns estilo mega menú (hover en desktop, click en touch/mobile).
         getElements('.nav-trigger').forEach(trigger => {
             trigger.addEventListener('click', (e) => {
@@ -328,6 +363,14 @@ class NavbarComponent {
                 this.closeMobileMenu();
             }
         });
+    }
+
+    updateCartCount() {
+        const count = (typeof carritoService !== 'undefined') ? carritoService.obtenerCantidadTotal() : 0;
+        const desktopCount = getElement('#cartNavCount');
+        const mobileCount = getElement('#mobileCartCount');
+        if (desktopCount) desktopCount.textContent = count;
+        if (mobileCount) mobileCount.textContent = count;
     }
 
     setupDropdownResponsiveness() {

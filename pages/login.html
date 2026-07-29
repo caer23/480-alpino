@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión - Cota 480</title>
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/auth.css">
+</head>
+<body>
+
+<div class="auth-page">
+
+    <!-- Logo -->
+    <div class="auth-logo">
+        <a href="../index.html">
+            <img src="../styles/main-logo.png" alt="Cota 480" onerror="this.style.display='none'">
+            <span class="auth-logo-text">Cota 480</span>
+        </a>
+    </div>
+
+    <!-- Card -->
+    <div class="auth-card">
+        <h1 class="auth-title">Bienvenido de vuelta</h1>
+        <p class="auth-subtitle">Ingresá tu cuenta para continuar</p>
+
+        <!-- Alert global -->
+        <div class="auth-alert error" id="loginAlert" role="alert"></div>
+
+        <form class="auth-form" id="loginForm" novalidate>
+
+            <!-- Email -->
+            <div class="form-group">
+                <label for="loginEmail">Email</label>
+                <input
+                    type="email"
+                    id="loginEmail"
+                    name="email"
+                    placeholder="tu@email.com"
+                    autocomplete="email"
+                    required
+                >
+                <span class="form-error" id="emailError">Ingresá un email válido</span>
+            </div>
+
+            <!-- Contraseña -->
+            <div class="form-group">
+                <label for="loginPassword">Contraseña</label>
+                <input
+                    type="password"
+                    id="loginPassword"
+                    name="password"
+                    placeholder="Mínimo 6 caracteres"
+                    autocomplete="current-password"
+                    required
+                >
+                <span class="form-error" id="passwordError">La contraseña debe tener al menos 6 caracteres</span>
+            </div>
+
+            <!-- Opciones -->
+            <div class="form-options">
+                <label class="checkbox-label">
+                    <input type="checkbox" id="rememberMe" name="rememberMe">
+                    Recuérdame
+                </label>
+                <a href="#" class="link-forgot" id="forgotLink">Olvidé mi contraseña</a>
+            </div>
+
+            <!-- Botón -->
+            <button type="submit" class="btn-auth" id="loginBtn">
+                <span class="spinner"></span>
+                <span class="btn-text">Ingresar</span>
+            </button>
+
+        </form>
+
+        <div class="auth-divider">o</div>
+
+        <!-- Enlace registro -->
+        <p class="auth-register">
+            ¿No tenés cuenta?
+            <a href="#" id="registerLink">Crear cuenta</a>
+        </p>
+    </div>
+
+</div>
+
+<!-- Scripts -->
+<script src="../js/utils/constants.js"></script>
+<script src="../js/utils/helpers.js"></script>
+<script src="../js/services/auth.js"></script>
+<script src="../js/components/auth.js"></script>
+
+</body>
+</html>
