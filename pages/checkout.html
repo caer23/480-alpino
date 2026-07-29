@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - Cota 480</title>
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/checkout.css">
+</head>
+<body>
+
+<!-- Header Checkout -->
+<header class="checkout-header">
+    <div class="container">
+        <div class="checkout-logo">
+            <a href="../index.html">
+                <img src="../styles/main-logo.png" alt="Cota 480" onerror="this.style.display='none'">
+                <span class="checkout-logo-text">Cota 480</span>
+            </a>
+        </div>
+        <div class="checkout-steps">
+            <div class="checkout-step active" id="stepCart">
+                <span class="checkout-step-num">1</span>
+                <span>Carrito</span>
+            </div>
+            <span class="checkout-step-divider">›</span>
+            <div class="checkout-step active" id="stepShipping">
+                <span class="checkout-step-num">2</span>
+                <span>Envío</span>
+            </div>
+            <span class="checkout-step-divider">›</span>
+            <div class="checkout-step" id="stepPayment">
+                <span class="checkout-step-num">3</span>
+                <span>Pago</span>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Main Checkout -->
+<main class="checkout-main" id="checkoutMain">
+    <div class="checkout-grid">
+
+        <!-- Columna izquierda -->
+        <div>
+
+            <!-- Dirección de envío -->
+            <section class="checkout-section">
+                <h2 class="checkout-section-title">📍 Dirección de envío</h2>
+                <form class="checkout-form" id="shippingForm" novalidate>
+                    <div class="form-group">
+                        <label for="shipNombre">Nombre</label>
+                        <input type="text" id="shipNombre" name="nombre" placeholder="Tu nombre" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="shipApellido">Apellido</label>
+                        <input type="text" id="shipApellido" name="apellido" placeholder="Tu apellido" required>
+                    </div>
+                    <div class="form-group full-width">
+                        <label for="shipDireccion">Dirección</label>
+                        <input type="text" id="shipDireccion" name="direccion" placeholder="Calle y número" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="shipCiudad">Ciudad</label>
+                        <input type="text" id="shipCiudad" name="ciudad" placeholder="Ciudad" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="shipProvincia">Provincia</label>
+                        <select id="shipProvincia" name="provincia" required>
+                            <option value="">Seleccionar...</option>
+                            <option>Buenos Aires</option>
+                            <option>Córdoba</option>
+                            <option>Santa Fe</option>
+                            <option>Mendoza</option>
+                            <option>Tucumán</option>
+                            <option>Neuquén</option>
+                            <option>Río Negro</option>
+                            <option>Chubut</option>
+                            <option>Santa Cruz</option>
+                            <option>Tierra del Fuego</option>
+                            <option>Otra</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="shipCp">Código Postal</label>
+                        <input type="text" id="shipCp" name="cp" placeholder="Ej: 1001" required>
+                    </div>
+                    <div class="form-group full-width">
+                        <label for="shipTelefono">Teléfono</label>
+                        <input type="tel" id="shipTelefono" name="telefono" placeholder="+54 9 11 0000-0000">
+                    </div>
+                </form>
+            </section>
+
+            <!-- Método de pago -->
+            <section class="checkout-section">
+                <h2 class="checkout-section-title">💳 Método de pago</h2>
+                <div class="payment-options" id="paymentOptions">
+
+                    <label class="payment-option">
+                        <input type="radio" name="paymentMethod" value="card" checked>
+                        <span class="payment-icon">💳</span>
+                        <div class="payment-option-info">
+                            <strong>Tarjeta de crédito / débito</strong>
+                            <span>Visa, Mastercard, American Express</span>
+                        </div>
+                    </label>
+
+                    <label class="payment-option">
+                        <input type="radio" name="paymentMethod" value="transfer">
+                        <span class="payment-icon">🏦</span>
+                        <div class="payment-option-info">
+                            <strong>Transferencia bancaria</strong>
+                            <span>Te enviamos los datos por email</span>
+                        </div>
+                    </label>
+
+                    <label class="payment-option">
+                        <input type="radio" name="paymentMethod" value="mercadopago">
+                        <span class="payment-icon">🛡️</span>
+                        <div class="payment-option-info">
+                            <strong>Mercado Pago</strong>
+                            <span>Pagá con tu cuenta Mercado Pago</span>
+                        </div>
+                    </label>
+
+                </div>
+
+                <!-- Campos tarjeta -->
+                <div class="payment-card-fields visible" id="cardFields">
+                    <div class="form-group full-width">
+                        <label for="cardNumber">Número de tarjeta</label>
+                        <input type="text" id="cardNumber" placeholder="0000 0000 0000 0000" maxlength="19">
+                    </div>
+                    <div class="form-group full-width">
+                        <label for="cardName">Nombre en la tarjeta</label>
+                        <input type="text" id="cardName" placeholder="Como aparece en la tarjeta">
+                    </div>
+                    <div class="form-group">
+                        <label for="cardExpiry">Vencimiento</label>
+                        <input type="text" id="cardExpiry" placeholder="MM/AA" maxlength="5">
+                    </div>
+                    <div class="form-group">
+                        <label for="cardCvv">CVV</label>
+                        <input type="text" id="cardCvv" placeholder="000" maxlength="4">
+                    </div>
+                </div>
+            </section>
+
+        </div>
+
+        <!-- Columna derecha: Resumen -->
+        <aside class="checkout-summary">
+            <h2 class="checkout-summary-title">Resumen de compra</h2>
+
+            <!-- Items del carrito -->
+            <div class="summary-items" id="summaryItems">
+                <p style="color:#999; font-size:14px; text-align:center">Cargando...</p>
+            </div>
+
+            <!-- Cupón de descuento -->
+            <div class="coupon-row">
+                <input type="text" class="coupon-input" id="couponInput" placeholder="CUPÓN DE DESCUENTO">
+                <button class="btn-apply-coupon" id="applyCouponBtn">Aplicar</button>
+            </div>
+            <div class="coupon-feedback" id="couponFeedback"></div>
+
+            <!-- Totales -->
+            <div class="summary-totals">
+                <div class="summary-total-row">
+                    <span>Subtotal</span>
+                    <span id="subtotalAmount">$0.00</span>
+                </div>
+                <div class="summary-total-row" id="discountRow" style="display:none">
+                    <span id="discountLabel">Descuento</span>
+                    <span id="discountAmount" class="discount">- $0.00</span>
+                </div>
+                <div class="summary-total-row">
+                    <span>Envío</span>
+                    <span id="shippingAmount">Gratis</span>
+                </div>
+                <div class="summary-total-row grand">
+                    <span>Total</span>
+                    <span id="grandTotal">$0.00</span>
+                </div>
+            </div>
+
+            <!-- Botón confirmar -->
+            <button class="btn-confirm-purchase" id="confirmPurchaseBtn">
+                🔒 Confirmar compra
+            </button>
+            <p class="security-note">🔐 Compra 100% segura y protegida</p>
+
+        </aside>
+
+    </div>
+</main>
+
+<!-- Confirmación de éxito -->
+<div class="checkout-success" id="checkoutSuccess">
+    <div class="checkout-success-icon">🎉</div>
+    <h2>¡Compra realizada con éxito!</h2>
+    <p>Te enviamos los detalles de tu compra por email.<br>Tu pedido llegará en <strong>5 días hábiles</strong>.</p>
+    <a href="../index.html" class="btn-back-home">🏔️ Volver al inicio</a>
+</div>
+
+<!-- Scripts -->
+<script src="../js/utils/constants.js"></script>
+<script src="../js/utils/helpers.js"></script>
+<script src="../js/services/auth.js"></script>
+<script src="../js/services/cart.js"></script>
+<script>
+    const CUPONES = {
+        'NIEVE480': { descuento: 0.15, label: '15% OFF' },
+        'CREW10': { descuento: 0.10, label: '10% OFF' },
+        'BIENVENIDO': { descuento: 0.20, label: '20% OFF - Bienvenida' }
+    };
+
+    let cuponAplicado = null;
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initCheckout);
+    } else {
+        initCheckout();
+    }
+
+    function initCheckout() {
+        renderSummary();
+        setupPaymentToggle();
+        setupCoupon();
+        setupCardFormatting();
+        setupPurchase();
+    }
+
+    function renderSummary() {
+        const items = carritoService.obtenerItems();
+        const total = carritoService.obtenerTotal();
+        const container = document.getElementById('summaryItems');
+
+        if (items.length === 0) {
+            container.innerHTML = '<p style="color:#999;font-size:14px;text-align:center">Tu carrito está vacío</p>';
+            document.getElementById('confirmPurchaseBtn').disabled = true;
+        } else {
+            container.innerHTML = items.map(item => `
+                <div class="summary-item">
+                    <img src="${item.imagen || ''}" alt="${item.nombre}" class="summary-item-img"
+                        onerror="this.src='https://via.placeholder.com/56x56?text=📦'">
+                    <div class="summary-item-info">
+                        <div class="summary-item-name">${item.nombre}</div>
+                        <div class="summary-item-qty">Cant: ${item.cantidad}</div>
+                    </div>
+                    <span class="summary-item-price">${formatearMoneda(item.precio * item.cantidad)}</span>
+                </div>
+            `).join('');
+        }
+
+        updateTotals(total);
+    }
+
+    function updateTotals(subtotal) {
+        const discount = cuponAplicado ? subtotal * cuponAplicado.descuento : 0;
+        const grandTotal = subtotal - discount;
+
+        document.getElementById('subtotalAmount').textContent = formatearMoneda(subtotal);
+        document.getElementById('grandTotal').textContent = formatearMoneda(grandTotal);
+
+        const discountRow = document.getElementById('discountRow');
+        if (discount > 0) {
+            discountRow.style.display = 'flex';
+            document.getElementById('discountLabel').textContent = cuponAplicado.label;
+            document.getElementById('discountAmount').textContent = `- ${formatearMoneda(discount)}`;
+        } else {
+            discountRow.style.display = 'none';
+        }
+    }
+
+    function setupPaymentToggle() {
+        document.querySelectorAll('input[name="paymentMethod"]').forEach(radio => {
+            radio.addEventListener('change', () => {
+                const cardFields = document.getElementById('cardFields');
+                cardFields.classList.toggle('visible', radio.value === 'card');
+            });
+        });
+    }
+
+    function setupCoupon() {
+        document.getElementById('applyCouponBtn').addEventListener('click', () => {
+            const code = document.getElementById('couponInput').value.trim().toUpperCase();
+            const feedback = document.getElementById('couponFeedback');
+
+            if (!code) {
+                feedback.textContent = 'Ingresá un código de cupón';
+                feedback.className = 'coupon-feedback visible error';
+                return;
+            }
+
+            const cupon = CUPONES[code];
+            if (cupon) {
+                cuponAplicado = cupon;
+                feedback.textContent = `✅ Cupón "${code}" aplicado: ${cupon.label}`;
+                feedback.className = 'coupon-feedback visible success';
+                updateTotals(carritoService.obtenerTotal());
+            } else {
+                cuponAplicado = null;
+                feedback.textContent = '❌ Cupón inválido o expirado';
+                feedback.className = 'coupon-feedback visible error';
+                updateTotals(carritoService.obtenerTotal());
+            }
+        });
+    }
+
+    function setupCardFormatting() {
+        const cardNum = document.getElementById('cardNumber');
+        if (cardNum) {
+            cardNum.addEventListener('input', (e) => {
+                let val = e.target.value.replace(/\D/g, '').substring(0, 16);
+                e.target.value = val.replace(/(.{4})/g, '$1 ').trim();
+            });
+        }
+
+        const cardExpiry = document.getElementById('cardExpiry');
+        if (cardExpiry) {
+            cardExpiry.addEventListener('input', (e) => {
+                let val = e.target.value.replace(/\D/g, '').substring(0, 4);
+                if (val.length >= 2) val = val.substring(0, 2) + '/' + val.substring(2);
+                e.target.value = val;
+            });
+        }
+    }
+
+    function setupPurchase() {
+        document.getElementById('confirmPurchaseBtn').addEventListener('click', () => {
+            const items = carritoService.obtenerItems();
+            if (items.length === 0) return;
+
+            const btn = document.getElementById('confirmPurchaseBtn');
+            btn.disabled = true;
+            btn.textContent = '⏳ Procesando...';
+
+            setTimeout(() => {
+                carritoService.vaciar();
+                document.getElementById('checkoutMain').style.display = 'none';
+                document.getElementById('checkoutSuccess').classList.add('visible');
+            }, 1500);
+        });
+    }
+</script>
+
+</body>
+</html>

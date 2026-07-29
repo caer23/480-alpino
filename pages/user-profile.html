@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Cuenta - Cota 480</title>
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/navbar.css">
+    <link rel="stylesheet" href="../styles/profile.css">
+    <link rel="stylesheet" href="../styles/cart.css">
+    <link rel="stylesheet" href="../styles/responsive.css">
+</head>
+<body>
+
+<!-- Header/Navbar -->
+<header class="navbar" id="navbar"></header>
+
+<div class="profile-page">
+
+    <!-- Banner superior -->
+    <div class="profile-header-banner">
+        <div class="profile-header-content">
+            <div class="profile-avatar-wrap">
+                <div class="profile-avatar" id="profileAvatar">?</div>
+                <button class="profile-avatar-edit" id="editAvatarBtn" title="Cambiar foto">✏️</button>
+            </div>
+            <div class="profile-info">
+                <h1 class="profile-name" id="profileName">Cargando...</h1>
+                <p class="profile-email" id="profileEmail"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contenido principal -->
+    <div class="profile-main">
+        <div class="profile-grid">
+
+            <!-- Sidebar / Navegación -->
+            <aside class="profile-sidebar">
+                <button class="profile-nav-item active" data-panel="panel-info">
+                    <span class="nav-icon">👤</span> Mi Perfil
+                </button>
+                <button class="profile-nav-item" data-panel="panel-orders">
+                    <span class="nav-icon">📦</span> Mis Compras
+                </button>
+                <button class="profile-nav-item" data-panel="panel-favorites">
+                    <span class="nav-icon">❤️</span> Favoritos
+                </button>
+                <button class="profile-nav-item" data-panel="panel-addresses">
+                    <span class="nav-icon">📍</span> Direcciones
+                </button>
+                <div class="profile-nav-separator"></div>
+                <button class="profile-nav-item logout" id="logoutBtn">
+                    <span class="nav-icon">🚪</span> Cerrar sesión
+                </button>
+            </aside>
+
+            <!-- Paneles de contenido -->
+            <main>
+
+                <!-- Panel: Mi Perfil -->
+                <section class="profile-panel active" id="panel-info">
+                    <h2 class="profile-panel-title">Mi Perfil</h2>
+                    <form class="profile-form" id="profileForm">
+                        <div class="form-group">
+                            <label for="firstName">Nombre</label>
+                            <input type="text" id="firstName" name="nombre" placeholder="Tu nombre">
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">Apellido</label>
+                            <input type="text" id="lastName" name="apellido" placeholder="Tu apellido">
+                        </div>
+                        <div class="form-group full-width">
+                            <label for="profileEmail2">Email</label>
+                            <input type="email" id="profileEmail2" name="email" placeholder="tu@email.com">
+                        </div>
+                        <div class="form-group full-width">
+                            <label for="profilePhone">Teléfono</label>
+                            <input type="tel" id="profilePhone" name="telefono" placeholder="+54 9 11 0000-0000">
+                        </div>
+                        <div class="profile-form-actions">
+                            <button type="button" class="btn-profile-cancel" id="cancelProfileBtn">Cancelar</button>
+                            <button type="submit" class="btn-profile-save">Guardar cambios</button>
+                        </div>
+                    </form>
+                </section>
+
+                <!-- Panel: Mis Compras -->
+                <section class="profile-panel" id="panel-orders">
+                    <h2 class="profile-panel-title">Mis Compras</h2>
+                    <div id="ordersContainer">
+                        <div class="orders-empty">
+                            <div class="empty-icon">📦</div>
+                            <p>Todavía no realizaste ninguna compra.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Panel: Favoritos -->
+                <section class="profile-panel" id="panel-favorites">
+                    <h2 class="profile-panel-title">Mis Favoritos</h2>
+                    <div id="favoritesContainer">
+                        <div class="orders-empty">
+                            <div class="empty-icon">❤️</div>
+                            <p>Todavía no agregaste favoritos.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Panel: Direcciones -->
+                <section class="profile-panel" id="panel-addresses">
+                    <h2 class="profile-panel-title">Mis Direcciones</h2>
+                    <div id="addressesContainer">
+                        <div class="orders-empty">
+                            <div class="empty-icon">📍</div>
+                            <p>No tenés direcciones guardadas.</p>
+                        </div>
+                    </div>
+                </section>
+
+            </main>
+        </div>
+    </div>
+</div>
+
+<!-- Cart Sidebar -->
+<div id="cartSidebar" class="cart-sidebar"></div>
+
+<!-- Scripts -->
+<script src="../js/utils/constants.js"></script>
+<script src="../js/utils/helpers.js"></script>
+<script src="../js/services/auth.js"></script>
+<script src="../js/services/cart.js"></script>
+<script src="../js/components/navbar.js"></script>
+<script src="../js/components/cart.js"></script>
+<script src="../js/components/auth.js"></script>
+<script>
+    // Inicializar perfil de usuario
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initProfile);
+    } else {
+        initProfile();
+    }
+
+    function initProfile() {
+        // Verificar autenticación
+        if (!authService.estaAutenticado()) {
+            window.location.href = 'login.html';
+            return;
+        }
+
+        const usuario = authService.obtenerUsuario();
+        cargarDatosUsuario(usuario);
+        setupNavPanel();
+        setupLogout();
+        setupProfileForm(usuario);
+    }
+
+    function cargarDatosUsuario(usuario) {
+        const nombreCompleto = [usuario.nombre, usuario.apellido].filter(Boolean).join(' ') || 'Usuario';
+        const iniciales = (usuario.nombre || 'U')[0].toUpperCase();
+
+        document.getElementById('profileName').textContent = nombreCompleto;
+        document.getElementById('profileEmail').textContent = usuario.email || '';
+        document.getElementById('profileAvatar').textContent = iniciales;
+        document.title = `${nombreCompleto} - Cota 480`;
+    }
+
+    function setupNavPanel() {
+        document.querySelectorAll('.profile-nav-item[data-panel]').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.profile-nav-item').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.profile-panel').forEach(p => p.classList.remove('active'));
+                btn.classList.add('active');
+                document.getElementById(btn.dataset.panel).classList.add('active');
+            });
+        });
+    }
+
+    function setupLogout() {
+        document.getElementById('logoutBtn').addEventListener('click', () => {
+            authService.logout();
+            window.location.href = '../index.html';
+        });
+    }
+
+    function setupProfileForm(usuario) {
+        const form = document.getElementById('profileForm');
+        form.querySelector('#firstName').value = usuario.nombre || '';
+        form.querySelector('#lastName').value = usuario.apellido || '';
+        form.querySelector('#profileEmail2').value = usuario.email || '';
+        form.querySelector('#profilePhone').value = usuario.telefono || '';
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const datos = {
+                nombre: form.firstName.value.trim(),
+                apellido: form.lastName.value.trim(),
+                email: form.email.value.trim(),
+                telefono: form.telefono.value.trim()
+            };
+            const actualizado = authService.actualizarPerfil(datos);
+            cargarDatosUsuario(actualizado);
+        });
+
+        document.getElementById('cancelProfileBtn').addEventListener('click', () => {
+            cargarDatosUsuario(authService.obtenerUsuario());
+        });
+    }
+</script>
+
+</body>
+</html>

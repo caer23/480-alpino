@@ -85,19 +85,57 @@
     padding: 40px 20px;
 }
 
+.cart-count-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #E8D5C4;
+    color: #1a3a47;
+    font-size: 12px;
+    font-weight: 800;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    margin-left: 6px;
+    vertical-align: middle;
+}
+
 .cart-item {
     display: grid;
-    grid-template-columns: 1fr 100px 40px;
-    gap: 15px;
-    padding: 15px 0;
+    grid-template-columns: 60px 1fr auto 32px;
+    gap: 12px;
+    padding: 14px 0;
     border-bottom: 1px solid #eee;
     align-items: center;
 }
 
+.cart-item-img {
+    width: 60px;
+    height: 60px;
+    border-radius: 8px;
+    object-fit: cover;
+    background: #f0f0f0;
+}
+
 .item-info h4 {
     color: #1a3a47;
-    font-size: 14px;
-    margin-bottom: 5px;
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 3px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.item-unit-price {
+    color: #888;
+    font-size: 12px;
+}
+
+.item-subtotal {
+    color: #1a3a47;
+    font-weight: 700;
+    font-size: 13px;
 }
 
 .item-price {
@@ -110,21 +148,36 @@
     display: flex;
     align-items: center;
     border: 1px solid #ddd;
-    border-radius: 3px;
+    border-radius: 6px;
+    overflow: hidden;
 }
 
 .qty-btn {
     background: none;
     border: none;
     color: #1a3a47;
-    width: 25px;
-    padding: 5px 0;
+    width: 28px;
+    height: 28px;
     cursor: pointer;
     font-weight: 700;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s ease;
 }
 
 .qty-btn:hover {
     background: #f0f0f0;
+}
+
+.qty-display {
+    min-width: 28px;
+    text-align: center;
+    font-size: 13px;
+    font-weight: 700;
+    color: #1a3a47;
+    padding: 0 4px;
 }
 
 .qty-input {
@@ -135,31 +188,109 @@
 }
 
 .btn-remove {
-    background: #d32f2f;
-    color: white;
+    background: none;
+    color: #ccc;
     border: none;
-    width: 30px;
-    height: 30px;
-    border-radius: 3px;
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
     cursor: pointer;
     font-size: 14px;
-    transition: all 0.3s ease;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .btn-remove:hover {
-    background: #c62828;
+    background: #fdecea;
+    color: #d32f2f;
 }
 
 .cart-footer {
-    padding: 20px;
+    padding: 16px 20px 20px;
     border-top: 2px solid #ddd;
     background: #f9f9f9;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Cupón dentro del carrito */
+.cart-coupon {
+    display: flex;
+    gap: 8px;
+}
+
+.coupon-input-cart {
+    flex: 1;
+    padding: 9px 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 13px;
+    outline: none;
+    text-transform: uppercase;
+    background: #fff;
+    transition: border-color 0.2s ease;
+}
+
+.coupon-input-cart:focus {
+    border-color: #1a3a47;
+}
+
+.coupon-input-cart:disabled {
+    background: #f5f5f5;
+    color: #888;
+}
+
+.btn-apply-coupon-cart {
+    padding: 9px 14px;
+    background: #1a3a47;
+    color: #E8D5C4;
+    border: none;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.2s ease;
+}
+
+.btn-apply-coupon-cart:hover {
+    background: #2d5a6f;
+}
+
+.coupon-tag {
+    font-size: 12px;
+    color: #388e3c;
+    font-weight: 600;
+}
+
+/* Totales */
+.cart-totals {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.cart-total-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    color: #666;
+}
+
+.discount-row {
+    color: #388e3c;
+    font-weight: 600;
 }
 
 .cart-total {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 15px;
+    padding-top: 8px;
+    margin-top: 4px;
+    border-top: 1px solid #ddd;
     font-size: 18px;
     font-weight: 700;
     color: #1a3a47;
