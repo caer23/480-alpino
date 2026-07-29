@@ -1,48 +1,87 @@
 /**
  * ESTILOS: FOOTER
- * Pie de página
+ * Pie de página - Guía de Estilos Cota 480
+ * Colores: Azul marino #1a3a47, Beige #E8D5C4, Blanco #ffffff
  */
 
 .footer {
-    background: #1a3a47;
+    background: linear-gradient(135deg, #1a3a47 0%, #2d5a6f 100%);
     color: #E8D5C4;
-    padding: 50px 0 20px;
+    padding: 80px 0 30px;
+    margin-top: 100px;
+    border-top: 1px solid rgba(232, 213, 196, 0.1);
+}
+
+.footer-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 40px;
 }
 
 .footer-content {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 40px;
-    margin-bottom: 40px;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 50px;
+    margin-bottom: 60px;
 }
 
-.footer-section h4 {
+/* COMPRADOR Section */
+.footer-section {
+    animation: slideUp 0.6s ease backwards;
+}
+
+.footer-section:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+.footer-section:nth-child(3) {
+    animation-delay: 0.2s;
+}
+
+.footer-section:nth-child(4) {
+    animation-delay: 0.3s;
+}
+
+.footer-section h3 {
     color: #ffffff;
-    font-size: 14px;
+    font-size: 18px;
     font-weight: 700;
-    margin-bottom: 15px;
+    margin-bottom: 25px;
     letter-spacing: 1px;
+    text-transform: uppercase;
+    position: relative;
+    padding-bottom: 12px;
 }
 
-.footer-section p {
-    font-size: 13px;
-    line-height: 1.6;
-    color: rgba(232, 213, 196, 0.8);
+.footer-section h3::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 40px;
+    height: 3px;
+    background: #E8D5C4;
+    border-radius: 2px;
 }
 
 .footer-section ul {
     list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
 .footer-section ul li {
-    margin-bottom: 10px;
+    margin-bottom: 14px;
+    font-size: 13px;
+    line-height: 1.6;
 }
 
 .footer-section a {
     color: #E8D5C4;
     text-decoration: none;
-    font-size: 13px;
     transition: all 0.3s ease;
+    font-weight: 500;
+    letter-spacing: 0.3px;
 }
 
 .footer-section a:hover {
@@ -50,20 +89,248 @@
     padding-left: 5px;
 }
 
-.social-links {
+/* Benefits Section */
+.footer-benefits {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 35px;
+    margin-bottom: 60px;
+    padding: 40px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    border: 1px solid rgba(232, 213, 196, 0.1);
+}
+
+.benefit-item {
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.benefit-item:hover {
+    transform: translateY(-5px);
+}
+
+.benefit-icon {
+    font-size: 36px;
+    margin-bottom: 12px;
+    display: inline-block;
+    transition: all 0.3s ease;
+}
+
+.benefit-item:hover .benefit-icon {
+    transform: scale(1.15);
+}
+
+.benefit-title {
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+}
+
+.benefit-description {
+    color: #E8D5C4;
+    font-size: 12px;
+    line-height: 1.5;
+    opacity: 0.95;
+}
+
+/* Social Section */
+.footer-social {
     display: flex;
+    align-items: center;
+    justify-content: center;
     gap: 15px;
+    padding: 30px 0;
+    border-top: 1px solid rgba(232, 213, 196, 0.2);
+    border-bottom: 1px solid rgba(232, 213, 196, 0.2);
     flex-wrap: wrap;
 }
 
-.social-links a {
-    display: inline-block;
+.social-label {
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
 }
 
+.social-links {
+    display: flex;
+    gap: 20px;
+}
+
+.social-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 45px;
+    height: 45px;
+    background: rgba(232, 213, 196, 0.1);
+    border: 2px solid rgba(232, 213, 196, 0.3);
+    border-radius: 50%;
+    color: #E8D5C4;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-size: 20px;
+}
+
+.social-link:hover {
+    background: #E8D5C4;
+    color: #1a3a47;
+    border-color: #E8D5C4;
+    transform: translateY(-3px);
+}
+
+.social-link svg {
+    width: 22px;
+    height: 22px;
+}
+
+/* Footer Bottom */
 .footer-bottom {
     text-align: center;
-    padding-top: 20px;
-    border-top: 1px solid rgba(232, 213, 196, 0.2);
+    padding-top: 30px;
     font-size: 12px;
     color: rgba(232, 213, 196, 0.7);
+    letter-spacing: 0.5px;
+}
+
+.footer-bottom p {
+    margin: 8px 0;
+}
+
+.footer-bottom a {
+    color: #E8D5C4;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-weight: 600;
+}
+
+.footer-bottom a:hover {
+    color: #ffffff;
+    text-decoration: underline;
+}
+
+/* Divider */
+.footer-divider {
+    width: 60px;
+    height: 2px;
+    background: #E8D5C4;
+    margin: 20px auto;
+    opacity: 0.5;
+}
+
+/* Logo Footer */
+.footer-logo {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 28px;
+    font-weight: 700;
+    color: #E8D5C4;
+    letter-spacing: 1px;
+}
+
+.footer-logo svg {
+    height: 40px;
+    width: auto;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .footer {
+        padding: 60px 0 30px;
+        margin-top: 60px;
+    }
+
+    .footer-container {
+        padding: 0 20px;
+    }
+
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 35px;
+        margin-bottom: 40px;
+    }
+
+    .footer-section h3 {
+        font-size: 16px;
+        margin-bottom: 18px;
+    }
+
+    .footer-section a {
+        font-size: 12px;
+    }
+
+    .footer-benefits {
+        grid-template-columns: 1fr;
+        gap: 25px;
+        padding: 30px 20px;
+    }
+
+    .benefit-item {
+        padding: 20px;
+    }
+
+    .footer-social {
+        flex-direction: column;
+        gap: 12px;
+        padding: 20px 0;
+    }
+
+    .social-links {
+        justify-content: center;
+    }
+
+    .footer-bottom {
+        font-size: 11px;
+        padding-top: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .footer {
+        padding: 50px 0 20px;
+        margin-top: 40px;
+    }
+
+    .footer-container {
+        padding: 0 15px;
+    }
+
+    .footer-content {
+        gap: 25px;
+    }
+
+    .footer-section h3 {
+        font-size: 14px;
+        margin-bottom: 15px;
+    }
+
+    .footer-section ul li {
+        font-size: 12px;
+        margin-bottom: 10px;
+    }
+
+    .footer-benefits {
+        gap: 15px;
+        padding: 20px 15px;
+    }
+
+    .benefit-title {
+        font-size: 12px;
+    }
+
+    .benefit-description {
+        font-size: 11px;
+    }
+
+    .social-link {
+        width: 40px;
+        height: 40px;
+        font-size: 18px;
+    }
 }
