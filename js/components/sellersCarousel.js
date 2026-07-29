@@ -5,7 +5,8 @@
 
 class SellersCarouselComponent {
     constructor() {
-        this.container = getElement('#privilegedSellers');
+        this.containerFirst = getElement('#privilegedSellersFirst');
+        this.containerRest = getElement('#privilegedSellersRest');
         this.vendedores = this.generarVendedores(20);
         this.init();
     }
@@ -63,17 +64,32 @@ class SellersCarouselComponent {
     }
 
     render() {
-        const carouselesHTML = this.vendedores.map(vendedor => this.renderCarrusel(vendedor)).join('');
+        const primerosCinco = this.vendedores.slice(0, 5);
+        const restantes = this.vendedores.slice(5);
 
-        this.container.innerHTML = `
-            <div class="container">
-                <h2>Vendedores privilegiados</h2>
-                <p class="sellers-subtitle">Espacios premium para vendedores que potencian su visibilidad en temporada.</p>
-                <div class="sellers-list">
-                    ${carouselesHTML}
+        if (this.containerFirst) {
+            const carouselesHTMLFirst = primerosCinco.map(vendedor => this.renderCarrusel(vendedor)).join('');
+            this.containerFirst.innerHTML = `
+                <div class="container">
+                    <h2>Vendedores privilegiados</h2>
+                    <p class="sellers-subtitle">Espacios premium para vendedores que potencian su visibilidad en temporada.</p>
+                    <div class="sellers-list">
+                        ${carouselesHTMLFirst}
+                    </div>
                 </div>
-            </div>
-        `;
+            `;
+        }
+
+        if (this.containerRest) {
+            const carouselesHTMLRest = restantes.map(vendedor => this.renderCarrusel(vendedor)).join('');
+            this.containerRest.innerHTML = `
+                <div class="container">
+                    <div class="sellers-list">
+                        ${carouselesHTMLRest}
+                    </div>
+                </div>
+            `;
+        }
     }
 }
 
