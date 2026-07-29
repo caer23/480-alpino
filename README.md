@@ -22,6 +22,8 @@ Tienda online especializada en compra y venta de artículos premium para deporte
 │   ├── hero.css
 │   ├── grid.css
 │   ├── configurador.css
+│   ├── categories.css
+│   ├── sellers-carousel.css
 │   ├── footer.css
 │   ├── cart.css
 │   ├── search.css
@@ -41,6 +43,7 @@ Tienda online especializada en compra y venta de artículos premium para deporte
 │   │   ├── grid.js
 │   │   ├── configurador.js
 │   │   ├── categories.js
+│   │   ├── sellersCarousel.js
 │   │   ├── footer.js
 │   │   ├── cart.js
 │   │   ├── notifications.js
