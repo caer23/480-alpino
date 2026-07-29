@@ -1,0 +1,161 @@
+/**
+ * ESTILOS: REVIEWS - CONECTA CON LA CREW
+ * Sección de reseñas de usuarios - Guía de Estilos 480
+ */
+
+.reviews-section {
+    background: #ffffff;
+    padding: 64px 0 80px;
+}
+
+.reviews-header {
+    text-align: center;
+    margin-bottom: 48px;
+}
+
+.reviews-title {
+    color: #1a3a47;
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    letter-spacing: -0.5px;
+}
+
+.reviews-subtitle {
+    color: #2d5a6f;
+    font-size: 15px;
+    max-width: 540px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* Grid de reviews */
+.reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+/* Tarjeta individual */
+.review-card {
+    background: #f8f3ee;
+    border: 1px solid rgba(26, 58, 71, 0.12);
+    border-radius: 16px;
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.review-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 28px rgba(26, 58, 71, 0.12);
+}
+
+/* Header de la tarjeta */
+.review-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+/* Avatar con iniciales */
+.review-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: #1a3a47;
+    color: #E8D5C4;
+    font-size: 16px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    letter-spacing: 0.5px;
+}
+
+.review-user-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.review-name {
+    color: #1a3a47;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.review-date {
+    color: #2d5a6f;
+    font-size: 12px;
+    opacity: 0.8;
+}
+
+/* Rating con estrellas */
+.review-rating {
+    display: flex;
+    gap: 3px;
+}
+
+.review-star {
+    font-size: 18px;
+    color: rgba(26, 58, 71, 0.2);
+    line-height: 1;
+}
+
+.review-star.filled {
+    color: #e8a020;
+}
+
+/* Comentario */
+.review-comment {
+    color: #333333;
+    font-size: 14px;
+    line-height: 1.65;
+    font-style: italic;
+    flex: 1;
+}
+
+/* Producto */
+.review-product {
+    color: #2d5a6f;
+    font-size: 12px;
+    border-top: 1px solid rgba(26, 58, 71, 0.1);
+    padding-top: 10px;
+    margin-top: auto;
+}
+
+.review-product em {
+    font-style: normal;
+    font-weight: 600;
+    color: #1a3a47;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .reviews-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 640px) {
+    .reviews-section {
+        padding: 48px 0 60px;
+    }
+
+    .reviews-title {
+        font-size: 26px;
+    }
+
+    .reviews-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .review-card {
+        padding: 20px;
+    }
+}
