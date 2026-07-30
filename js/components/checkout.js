@@ -38,6 +38,15 @@ class CheckoutComponent {
         return `${Date.now()}_${Math.random().toString(36).slice(2, 12)}`;
     }
 
+    escapeHtml(value) {
+        return String(value ?? '')
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#39;');
+    }
+
     setCsrfToken() {
         sessionStorage.setItem('480_checkout_csrf', this.csrfToken);
         const input = document.getElementById('csrfToken');
@@ -94,8 +103,8 @@ class CheckoutComponent {
             <label class="address-option">
                 <input type="radio" name="savedAddress" value="${index}">
                 <div class="address-option-info">
-                    <strong>${address.name}</strong>
-                    <span>${address.address}, ${address.city} (${address.province})</span>
+                    <strong>${this.escapeHtml(address.name)}</strong>
+                    <span>${this.escapeHtml(address.address)}, ${this.escapeHtml(address.city)} (${this.escapeHtml(address.province)})</span>
                 </div>
             </label>
         `).join('');
@@ -307,6 +316,16 @@ class CheckoutComponent {
         if (!review) return;
 
         const address = this.getShippingAddressFromForm();
+        const safeAddress = {
+            name: this.escapeHtml(address.name),
+            email: this.escapeHtml(address.email),
+            phone: this.escapeHtml(address.phone),
+            province: this.escapeHtml(address.province),
+            city: this.escapeHtml(address.city),
+            postal_code: this.escapeHtml(address.postal_code),
+            address: this.escapeHtml(address.address),
+            apartment: this.escapeHtml(address.apartment)
+        };
         const paymentLabel = {
             mercadopago: 'Tarjeta por MercadoPago',
             transfer: 'Transferencia bancaria',
@@ -321,7 +340,7 @@ class CheckoutComponent {
                 <tbody>
                     ${this.items.map(item => `
                         <tr>
-                            <td>${item.nombre}</td>
+                            <td>${this.escapeHtml(item.nombre)}</td>
                             <td>${item.cantidad}</td>
                             <td>${formatearMoneda(item.precio * item.cantidad)}</td>
                         </tr>
@@ -332,10 +351,10 @@ class CheckoutComponent {
             <div class="checkout-review-meta">
                 <div>
                     <h4>Dirección</h4>
-                    <p>${address.name}</p>
-                    <p>${address.address}${address.apartment ? `, ${address.apartment}` : ''}</p>
-                    <p>${address.city}, ${address.province} (${address.postal_code})</p>
-                    <p>${address.phone} · ${address.email}</p>
+                    <p>${safeAddress.name}</p>
+                    <p>${safeAddress.address}${safeAddress.apartment ? `, ${safeAddress.apartment}` : ''}</p>
+                    <p>${safeAddress.city}, ${safeAddress.province} (${safeAddress.postal_code})</p>
+                    <p>${safeAddress.phone} · ${safeAddress.email}</p>
                 </div>
                 <div>
                     <h4>Pago</h4>
