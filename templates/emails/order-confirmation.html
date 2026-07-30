@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="es">
+<head><meta charset="UTF-8"><title>Confirmación de compra</title></head>
+<body style="font-family:Arial,sans-serif;background:#f5f5f5;padding:24px;">
+  <table style="max-width:600px;margin:auto;background:#fff;border-radius:10px;padding:20px;">
+    <tr><td>
+      <h1 style="color:#1a3a47;margin-top:0;">Cota 480</h1>
+      <p>¡Gracias por tu compra! Tu orden fue recibida correctamente.</p>
+      <p><strong>Número de orden:</strong> {{order_id}}</p>
+      <p><strong>Fecha:</strong> {{order_date}}</p>
+      <p><strong>Total pagado:</strong> {{total}}</p>
+      <p><strong>Dirección de envío:</strong> {{shipping_address}}</p>
+      <p><strong>Entrega estimada:</strong> {{estimated_delivery}}</p>
+      <p><a href="{{tracking_url}}">Rastrear pedido</a> · <a href="{{profile_url}}">Ir a mi perfil</a></p>
+      <p>Si necesitás ayuda, escribinos a soporte@cota480.com.</p>
+    </td></tr>
+  </table>
+</body>
+</html>

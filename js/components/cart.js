@@ -188,9 +188,9 @@ class CartComponent {
         if (checkoutBtn && !checkoutBtn.disabled) {
             checkoutBtn.addEventListener('click', () => {
                 this.toggle();
-                // Redirigir a checkout
+                // Redirigir al carrito completo
                 const base = window.location.pathname.includes('/pages/') ? '' : 'pages/';
-                window.location.href = base + 'checkout.html';
+                window.location.href = base + 'cart.html';
             });
         }
     }

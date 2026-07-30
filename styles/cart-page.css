@@ -1,0 +1,241 @@
+.cart-page {
+    background: #f5f5f5;
+    min-height: 100vh;
+}
+
+.cart-page-header {
+    background: #1a3a47;
+    padding: 14px 0;
+}
+
+.cart-page-header-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+}
+
+.cart-page-brand,
+.cart-page-continue-link {
+    color: #E8D5C4;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.cart-page-main {
+    display: grid;
+    grid-template-columns: 1fr 360px;
+    gap: 24px;
+    padding: 28px 16px 48px;
+}
+
+.cart-page-list-section h1 {
+    color: #1a3a47;
+    margin-bottom: 16px;
+}
+
+.cart-page-items {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.cart-page-item {
+    background: #fff;
+    border-radius: 12px;
+    padding: 14px;
+    display: grid;
+    grid-template-columns: 90px 1fr auto;
+    gap: 14px;
+    align-items: center;
+}
+
+.cart-page-item img {
+    width: 90px;
+    height: 90px;
+    border-radius: 10px;
+    object-fit: cover;
+    background: #eee;
+}
+
+.cart-page-item-info h3 {
+    margin: 0 0 6px;
+    color: #1a3a47;
+    font-size: 16px;
+}
+
+.cart-page-item-info p {
+    margin: 0 0 10px;
+    color: #666;
+}
+
+.cart-page-item-price {
+    text-align: right;
+}
+
+.cart-page-item-price button {
+    border: none;
+    background: transparent;
+    color: #f44336;
+    cursor: pointer;
+    margin-top: 8px;
+}
+
+.cart-page-qty {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.cart-page-qty button {
+    width: 28px;
+    height: 28px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    background: #fff;
+    cursor: pointer;
+}
+
+.cart-page-summary {
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    height: fit-content;
+    position: sticky;
+    top: 16px;
+}
+
+.cart-page-coupon {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 4px;
+}
+
+.cart-page-coupon input {
+    flex: 1;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+}
+
+.cart-page-coupon button {
+    background: #1a3a47;
+    color: #E8D5C4;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.cart-page-coupon-feedback {
+    min-height: 20px;
+    font-size: 13px;
+}
+
+.cart-page-coupon-feedback.success { color: #4CAF50; }
+.cart-page-coupon-feedback.error { color: #f44336; }
+.cart-page-coupon-feedback.info { color: #666; }
+
+.cart-page-shipping-estimate {
+    margin: 16px 0;
+    padding: 12px;
+    border-radius: 10px;
+    background: #f9f9f9;
+}
+
+.cart-page-shipping-estimate h3 {
+    margin: 0 0 8px;
+    color: #1a3a47;
+    font-size: 15px;
+}
+
+.cart-page-shipping-estimate ul {
+    margin: 0;
+    padding-left: 18px;
+    color: #555;
+    font-size: 13px;
+}
+
+.cart-page-totals {
+    border-top: 1px solid #eee;
+    padding-top: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.cart-page-totals > div {
+    display: flex;
+    justify-content: space-between;
+}
+
+.cart-page-totals .total {
+    border-top: 1px solid #ddd;
+    padding-top: 10px;
+    font-size: 18px;
+    color: #1a3a47;
+}
+
+.cart-page-totals .discount {
+    color: #4CAF50;
+}
+
+.cart-page-checkout,
+.cart-page-secondary-btn {
+    width: 100%;
+    margin-top: 12px;
+    border-radius: 10px;
+    padding: 12px;
+    text-align: center;
+    text-decoration: none;
+    border: none;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.cart-page-checkout {
+    background: #1a3a47;
+    color: #E8D5C4;
+}
+
+.cart-page-secondary-btn {
+    background: #e8d5c4;
+    color: #1a3a47;
+    display: block;
+}
+
+.cart-page-empty {
+    background: #fff;
+    border-radius: 10px;
+    padding: 24px;
+    text-align: center;
+}
+
+@media (max-width: 960px) {
+    .cart-page-main {
+        grid-template-columns: 1fr;
+    }
+
+    .cart-page-summary {
+        position: static;
+    }
+}
+
+@media (max-width: 640px) {
+    .cart-page-item {
+        grid-template-columns: 70px 1fr;
+    }
+
+    .cart-page-item img {
+        width: 70px;
+        height: 70px;
+    }
+
+    .cart-page-item-price {
+        grid-column: 1 / -1;
+        text-align: left;
+        display: flex;
+        justify-content: space-between;
+    }
+}
