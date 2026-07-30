@@ -39,6 +39,12 @@ class SearchComponent {
             `).join('');
         }
 
+        const isInPages = window.location.pathname.includes('/pages/');
+        const searchBase = isInPages ? '' : 'pages/';
+        const verTodosHTML = termino && resultados.length > 0
+            ? `<a class="search-ver-todos" href="${searchBase}search-results.html?q=${encodeURIComponent(termino)}">Ver todos los resultados (${resultados.length}) →</a>`
+            : '';
+
         const html = `
             <div class="search-overlay"></div>
             <div class="search-container">
@@ -48,6 +54,7 @@ class SearchComponent {
                 </div>
                 <div class="search-results">
                     ${resultadosHTML}
+                    ${verTodosHTML}
                 </div>
             </div>
         `;
@@ -80,7 +87,36 @@ class SearchComponent {
             searchField.addEventListener('input', (e) => {
                 debouncedSearch(e.target.value);
             });
+
+            // Enter → go to search results page
+            searchField.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    const val = searchField.value.trim();
+                    if (val) {
+                        const isInPages = window.location.pathname.includes('/pages/');
+                        const base = isInPages ? '' : 'pages/';
+                        window.location.href = `${base}search-results.html?q=${encodeURIComponent(val)}`;
+                    }
+                }
+            });
+
+            // Focus on open
+            setTimeout(() => { if (searchField) searchField.focus(); }, 100);
         }
+
+        // Click en resultado → ir a detalle
+        getElements('.search-result-item').forEach(item => {
+            item.addEventListener('click', (e) => {
+                if (e.target.closest('.btn-add-result')) return;
+                const productId = item.dataset.productId;
+                if (productId) {
+                    const isInPages = window.location.pathname.includes('/pages/');
+                    const base = isInPages ? '' : 'pages/';
+                    window.location.href = `${base}product-detail.html?id=${productId}`;
+                }
+            });
+        });
 
         // Botones de agregar
         getElements('.btn-add-result').forEach(btn => {

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="pageTitle">Cota 480 - Detalle de Producto</title>
+    <meta name="description" id="metaDescription" content="Equipamiento de nieve premium Cota 480">
+
+    <!-- Open Graph -->
+    <meta property="og:title" id="ogTitle" content="Cota 480">
+    <meta property="og:description" id="ogDescription" content="Equipamiento de nieve premium">
+    <meta property="og:image" id="ogImage" content="">
+    <meta property="og:type" content="product">
+
+    <!-- Schema.org structured data -->
+    <script type="application/ld+json" id="schemaData">{}</script>
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/navbar.css">
+    <link rel="stylesheet" href="../styles/footer.css">
+    <link rel="stylesheet" href="../styles/cart.css">
+    <link rel="stylesheet" href="../styles/search.css">
+    <link rel="stylesheet" href="../styles/animations.css">
+    <link rel="stylesheet" href="../styles/responsive.css">
+    <link rel="stylesheet" href="../styles/product-detail.css">
+</head>
+<body>
+    <!-- Header/Navbar -->
+    <header class="navbar" id="navbar"></header>
+
+    <!-- Search Bar Modal -->
+    <div id="searchModal" class="search-modal"></div>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Breadcrumb -->
+        <div class="breadcrumb-bar">
+            <div class="container">
+                <nav class="breadcrumb" id="productBreadcrumb" aria-label="Breadcrumb"></nav>
+            </div>
+        </div>
+
+        <!-- Product Detail Section -->
+        <section class="product-detail-section">
+            <div class="container">
+                <div id="productDetailContent" class="product-detail-wrapper">
+                    <!-- Loading state -->
+                    <div class="pd-loading">
+                        <div class="pd-loading-spinner"></div>
+                        <p>Cargando producto...</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tabs: Description / Specs / Shipping -->
+        <section class="product-tabs-section" id="productTabsSection" style="display:none">
+            <div class="container">
+                <div class="tabs-header">
+                    <button class="tab-btn active" data-tab="description">Descripción</button>
+                    <button class="tab-btn" data-tab="specs">Especificaciones</button>
+                    <button class="tab-btn" data-tab="shipping">Envío y Devoluciones</button>
+                </div>
+                <div class="tabs-content">
+                    <div class="tab-panel active" id="tab-description"></div>
+                    <div class="tab-panel" id="tab-specs"></div>
+                    <div class="tab-panel" id="tab-shipping">
+                        <div class="shipping-info">
+                            <div class="shipping-block">
+                                <span class="shipping-icon">🚚</span>
+                                <div>
+                                    <h4>Envío gratuito</h4>
+                                    <p>En todos nuestros productos. Entrega en 2-5 días hábiles según destino.</p>
+                                </div>
+                            </div>
+                            <div class="shipping-block">
+                                <span class="shipping-icon">↩️</span>
+                                <div>
+                                    <h4>Devolución sin cargo</h4>
+                                    <p>Tenés 30 días desde la recepción para devolver el producto en perfectas condiciones.</p>
+                                </div>
+                            </div>
+                            <div class="shipping-block">
+                                <span class="shipping-icon">🛡️</span>
+                                <div>
+                                    <h4>Garantía 2 años</h4>
+                                    <p>Todos nuestros productos cuentan con garantía de 2 años contra defectos de fabricación.</p>
+                                </div>
+                            </div>
+                            <div class="shipping-block">
+                                <span class="shipping-icon">🏪</span>
+                                <div>
+                                    <h4>Retiro en tienda</h4>
+                                    <p>Podés retirar tu compra sin costo adicional en nuestro local de Bariloche y Buenos Aires.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Reviews Section -->
+        <section class="product-reviews-section" id="productReviewsSection" style="display:none">
+            <div class="container">
+                <h2 class="section-title">Calificaciones y Reseñas</h2>
+                <div id="reviewsContent"></div>
+            </div>
+        </section>
+
+        <!-- Related Products -->
+        <section class="related-products-section" id="relatedProductsSection" style="display:none">
+            <div class="container">
+                <h2 class="section-title">Productos Relacionados</h2>
+                <div class="related-carousel" id="relatedCarousel"></div>
+            </div>
+        </section>
+
+        <!-- FAQs -->
+        <section class="product-faq-section" id="productFaqSection" style="display:none">
+            <div class="container">
+                <h2 class="section-title">Preguntas Frecuentes</h2>
+                <div id="faqContent" class="faq-list"></div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer" id="footer"></footer>
+
+    <!-- Cart Sidebar -->
+    <div id="cartSidebar" class="cart-sidebar"></div>
+
+    <!-- Notifications Container -->
+    <div id="notificationsContainer" class="notifications-container"></div>
+
+    <!-- Image Gallery Modal -->
+    <div id="galleryModal" class="gallery-modal" style="display:none">
+        <button class="gallery-modal-close" id="galleryModalClose">✕</button>
+        <div class="gallery-modal-content">
+            <button class="gallery-nav gallery-prev" id="galleryModalPrev">&#8249;</button>
+            <img src="" alt="" class="gallery-modal-img" id="galleryModalImg">
+            <button class="gallery-nav gallery-next" id="galleryModalNext">&#8250;</button>
+        </div>
+        <div class="gallery-modal-dots" id="galleryModalDots"></div>
+    </div>
+
+    <!-- Share Modal -->
+    <div id="shareModal" class="share-modal" style="display:none">
+        <div class="share-modal-content">
+            <button class="share-modal-close" id="shareModalClose">✕</button>
+            <h3>Compartir producto</h3>
+            <div class="share-options">
+                <button class="share-btn share-copy" id="shareCopy">📋 Copiar enlace</button>
+                <a class="share-btn share-whatsapp" id="shareWhatsapp" href="#" target="_blank" rel="noopener">💬 WhatsApp</a>
+                <a class="share-btn share-facebook" id="shareFacebook" href="#" target="_blank" rel="noopener">📘 Facebook</a>
+                <a class="share-btn share-twitter" id="shareTwitter" href="#" target="_blank" rel="noopener">🐦 Twitter/X</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../js/utils/constants.js"></script>
+    <script src="../js/utils/helpers.js"></script>
+    <script src="../js/services/auth.js"></script>
+    <script src="../js/services/cart.js"></script>
+    <script src="../js/services/products.js"></script>
+    <script src="../js/services/search.js"></script>
+    <script src="../js/components/navbar.js"></script>
+    <script src="../js/components/footer.js"></script>
+    <script src="../js/components/cart.js"></script>
+    <script src="../js/components/notifications.js"></script>
+    <script src="../js/components/search.js"></script>
+    <script src="../js/components/productDetail.js"></script>
+</body>
+</html>

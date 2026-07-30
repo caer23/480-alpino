@@ -118,3 +118,9 @@
     background: #2d5a6f;
     transform: scale(1.05);
 }
+
+.product-item-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+}

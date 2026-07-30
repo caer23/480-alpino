@@ -104,6 +104,7 @@
     border-bottom: 1px solid #eee;
     align-items: center;
     transition: background 0.3s ease;
+    cursor: pointer;
 }
 
 .search-result-item:hover {
@@ -151,4 +152,21 @@
 .btn-add-result:hover {
     background: #2d5a6f;
     transform: scale(1.05);
+}
+
+.search-ver-todos {
+    display: block;
+    text-align: center;
+    padding: 12px;
+    background: #f9f6f3;
+    border-top: 1px solid #e0e0e0;
+    color: #1a3a47;
+    font-weight: 700;
+    font-size: 13px;
+    text-decoration: none;
+    transition: background 0.2s;
+}
+
+.search-ver-todos:hover {
+    background: #E8D5C4;
 }

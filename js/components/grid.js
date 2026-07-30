@@ -19,11 +19,13 @@ class GridComponent {
         const productos = productosService.obtenerTodos();
         const productosHTML = productos.map(producto => `
             <div class="product-item" data-product-id="${producto.id}">
-                <div class="product-image">
-                    <img src="${producto.imagen}" alt="${producto.nombre}">
-                </div>
-                <h3>${producto.nombre}</h3>
-                <p class="product-price">${formatearMoneda(producto.precio)}</p>
+                <a href="pages/product-detail.html?id=${producto.id}" class="product-item-link">
+                    <div class="product-image">
+                        <img src="${producto.imagen}" alt="${producto.nombre}" loading="lazy">
+                    </div>
+                    <h3>${producto.nombre}</h3>
+                    <p class="product-price">${formatearMoneda(producto.precio)}</p>
+                </a>
                 <button class="btn-add-small" data-id="${producto.id}">AÑADIR</button>
             </div>
         `).join('');
@@ -84,11 +86,13 @@ class GridComponent {
 
         const productosHTML = productos.map(producto => `
             <div class="product-item" data-product-id="${producto.id}">
-                <div class="product-image">
-                    <img src="${producto.imagen}" alt="${producto.nombre}">
-                </div>
-                <h3>${producto.nombre}</h3>
-                <p class="product-price">${formatearMoneda(producto.precio)}</p>
+                <a href="pages/product-detail.html?id=${producto.id}" class="product-item-link">
+                    <div class="product-image">
+                        <img src="${producto.imagen}" alt="${producto.nombre}" loading="lazy">
+                    </div>
+                    <h3>${producto.nombre}</h3>
+                    <p class="product-price">${formatearMoneda(producto.precio)}</p>
+                </a>
                 <button class="btn-add-small" data-id="${producto.id}">AÑADIR</button>
             </div>
         `).join('');

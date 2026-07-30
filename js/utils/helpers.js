@@ -9,11 +9,10 @@
  * @returns {string} Valor formateado
  */
 function formatearMoneda(valor) {
-    return new Intl.NumberFormat('en-US', {
-        style: 'currency',
-        currency: 'USD',
-        minimumFractionDigits: 2
-    }).format(valor);
+    return '$' + Number(valor).toLocaleString('es-AR', {
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 0
+    });
 }
 
 /**
