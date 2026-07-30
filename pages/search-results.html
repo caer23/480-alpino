@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="pageTitle">Cota 480 - Resultados de Búsqueda</title>
+    <meta name="description" content="Búsqueda de equipamiento de nieve premium Cota 480">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/navbar.css">
+    <link rel="stylesheet" href="../styles/footer.css">
+    <link rel="stylesheet" href="../styles/cart.css">
+    <link rel="stylesheet" href="../styles/search.css">
+    <link rel="stylesheet" href="../styles/animations.css">
+    <link rel="stylesheet" href="../styles/responsive.css">
+    <link rel="stylesheet" href="../styles/search-results.css">
+</head>
+<body>
+    <!-- Header/Navbar -->
+    <header class="navbar" id="navbar"></header>
+
+    <!-- Search Bar Modal -->
+    <div id="searchModal" class="search-modal"></div>
+
+    <!-- Main Content -->
+    <main class="sr-main">
+        <!-- Search Header -->
+        <div class="sr-search-header">
+            <div class="container">
+                <div class="sr-search-bar-wrapper">
+                    <form class="sr-search-form" id="srSearchForm">
+                        <input
+                            type="text"
+                            class="sr-search-input"
+                            id="srSearchInput"
+                            placeholder="Buscar en Cota 480..."
+                            autocomplete="off"
+                        >
+                        <button type="submit" class="sr-search-submit">🔍</button>
+                    </form>
+                    <div class="sr-autocomplete" id="srAutocomplete" style="display:none"></div>
+                </div>
+                <!-- Trending searches -->
+                <div class="sr-trending" id="srTrending">
+                    <span class="sr-trending-label">Más buscado:</span>
+                    <button class="sr-trending-tag" data-q="tabla snowboard">tabla snowboard</button>
+                    <button class="sr-trending-tag" data-q="antiparras">antiparras</button>
+                    <button class="sr-trending-tag" data-q="botas nieve">botas nieve</button>
+                    <button class="sr-trending-tag" data-q="casco">casco</button>
+                    <button class="sr-trending-tag" data-q="splitboard">splitboard</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="sr-layout">
+                <!-- Sidebar Filters -->
+                <aside class="sr-sidebar" id="srSidebar">
+                    <div class="sr-sidebar-header">
+                        <h3>Filtros</h3>
+                        <button class="sr-clear-filters" id="srClearFilters">Limpiar filtros</button>
+                    </div>
+
+                    <!-- Category Filter -->
+                    <div class="sr-filter-group" id="filterCategory">
+                        <h4 class="sr-filter-title">
+                            Categoría
+                            <span class="sr-filter-toggle">▼</span>
+                        </h4>
+                        <div class="sr-filter-body">
+                            <label class="sr-checkbox"><input type="checkbox" name="category" value="tablas"> Tablas <span class="sr-count"></span></label>
+                            <label class="sr-checkbox"><input type="checkbox" name="category" value="botas"> Botas <span class="sr-count"></span></label>
+                            <label class="sr-checkbox"><input type="checkbox" name="category" value="optica"> Antiparras <span class="sr-count"></span></label>
+                            <label class="sr-checkbox"><input type="checkbox" name="category" value="ropa"> Ropa <span class="sr-count"></span></label>
+                            <label class="sr-checkbox"><input type="checkbox" name="category" value="accesorios"> Accesorios <span class="sr-count"></span></label>
+                            <label class="sr-checkbox"><input type="checkbox" name="category" value="proteccion"> Protección <span class="sr-count"></span></label>
+                            <label class="sr-checkbox"><input type="checkbox" name="category" value="kits"> Kits <span class="sr-count"></span></label>
+                            <label class="sr-checkbox"><input type="checkbox" name="category" value="fijaciones"> Fijaciones <span class="sr-count"></span></label>
+                        </div>
+                    </div>
+
+                    <!-- Price Range Filter -->
+                    <div class="sr-filter-group" id="filterPrice">
+                        <h4 class="sr-filter-title">
+                            Rango de Precio
+                            <span class="sr-filter-toggle">▼</span>
+                        </h4>
+                        <div class="sr-filter-body">
+                            <div class="sr-price-inputs">
+                                <input type="number" class="sr-price-input" id="priceMin" placeholder="Mín" min="0">
+                                <span class="sr-price-sep">—</span>
+                                <input type="number" class="sr-price-input" id="priceMax" placeholder="Máx" max="999999">
+                            </div>
+                            <div class="sr-price-slider-container">
+                                <div class="sr-price-range-track">
+                                    <div class="sr-price-range-fill" id="priceRangeFill"></div>
+                                    <input type="range" class="sr-range-input" id="rangeMin" min="0" max="500000" value="0" step="1000">
+                                    <input type="range" class="sr-range-input" id="rangeMax" min="0" max="500000" value="500000" step="1000">
+                                </div>
+                                <div class="sr-price-labels">
+                                    <span>$0</span>
+                                    <span>$500.000</span>
+                                </div>
+                            </div>
+                            <button class="sr-apply-price" id="srApplyPrice">Aplicar</button>
+                        </div>
+                    </div>
+
+                    <!-- Brand Filter -->
+                    <div class="sr-filter-group" id="filterBrand">
+                        <h4 class="sr-filter-title">
+                            Marca
+                            <span class="sr-filter-toggle">▼</span>
+                        </h4>
+                        <div class="sr-filter-body">
+                            <label class="sr-checkbox"><input type="checkbox" name="brand" value="Cota 480"> Cota 480 <span class="sr-count"></span></label>
+                            <label class="sr-checkbox"><input type="checkbox" name="brand" value="Burton"> Burton <span class="sr-count"></span></label>
+                            <label class="sr-checkbox"><input type="checkbox" name="brand" value="Salomon"> Salomon <span class="sr-count"></span></label>
+                            <label class="sr-checkbox"><input type="checkbox" name="brand" value="Oakley"> Oakley <span class="sr-count"></span></label>
+                            <label class="sr-checkbox"><input type="checkbox" name="brand" value="K2"> K2 <span class="sr-count"></span></label>
+                        </div>
+                    </div>
+
+                    <!-- Rating Filter -->
+                    <div class="sr-filter-group" id="filterRating">
+                        <h4 class="sr-filter-title">
+                            Calificación mínima
+                            <span class="sr-filter-toggle">▼</span>
+                        </h4>
+                        <div class="sr-filter-body">
+                            <label class="sr-radio"><input type="radio" name="rating" value="5"> ⭐⭐⭐⭐⭐ (5)</label>
+                            <label class="sr-radio"><input type="radio" name="rating" value="4"> ⭐⭐⭐⭐ (4+)</label>
+                            <label class="sr-radio"><input type="radio" name="rating" value="3"> ⭐⭐⭐ (3+)</label>
+                            <label class="sr-radio"><input type="radio" name="rating" value=""> Cualquiera</label>
+                        </div>
+                    </div>
+
+                    <!-- Shipping Filter -->
+                    <div class="sr-filter-group" id="filterShipping">
+                        <h4 class="sr-filter-title">
+                            Envío
+                            <span class="sr-filter-toggle">▼</span>
+                        </h4>
+                        <div class="sr-filter-body">
+                            <label class="sr-checkbox"><input type="checkbox" name="shipping" value="free"> Envío gratis</label>
+                            <label class="sr-checkbox"><input type="checkbox" name="shipping" value="pickup"> Retiro en tienda</label>
+                        </div>
+                    </div>
+
+                    <!-- Discount Filter -->
+                    <div class="sr-filter-group" id="filterDiscount">
+                        <h4 class="sr-filter-title">
+                            Descuento
+                            <span class="sr-filter-toggle">▼</span>
+                        </h4>
+                        <div class="sr-filter-body">
+                            <label class="sr-checkbox"><input type="checkbox" name="discount" value="1"> Con descuento</label>
+                        </div>
+                    </div>
+                </aside>
+
+                <!-- Main Results Area -->
+                <div class="sr-content">
+                    <!-- Results header -->
+                    <div class="sr-results-header">
+                        <div class="sr-results-info">
+                            <h1 class="sr-results-title" id="srResultsTitle">Resultados de búsqueda</h1>
+                            <p class="sr-results-count" id="srResultsCount"></p>
+                        </div>
+                        <div class="sr-results-controls">
+                            <div class="sr-view-toggle">
+                                <button class="sr-view-btn active" id="viewGrid" title="Vista grilla">▦</button>
+                                <button class="sr-view-btn" id="viewList" title="Vista lista">☰</button>
+                            </div>
+                            <select class="sr-sort-select" id="srSortSelect">
+                                <option value="relevance">Relevancia</option>
+                                <option value="price-asc">Precio: menor a mayor</option>
+                                <option value="price-desc">Precio: mayor a menor</option>
+                                <option value="rating">Mejor calificado</option>
+                                <option value="discount">Mayor descuento</option>
+                                <option value="newest">Más nuevo</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Active Filters Tags -->
+                    <div class="sr-active-filters" id="srActiveFilters" style="display:none">
+                        <span class="sr-active-filters-label">Filtros activos:</span>
+                        <div class="sr-filter-tags" id="srFilterTags"></div>
+                    </div>
+
+                    <!-- Mobile filter toggle -->
+                    <button class="sr-mobile-filter-toggle" id="srMobileFilterToggle">
+                        🔧 Filtros <span id="srActiveFilterCount"></span>
+                    </button>
+
+                    <!-- Results Grid -->
+                    <div class="sr-results-grid" id="srResultsGrid">
+                        <!-- Products rendered by JS -->
+                    </div>
+
+                    <!-- Empty state -->
+                    <div class="sr-empty" id="srEmpty" style="display:none">
+                        <div class="sr-empty-icon">🔍</div>
+                        <h3>No se encontraron resultados</h3>
+                        <p>Intentá con otra búsqueda o eliminá algunos filtros</p>
+                        <button class="sr-btn-primary" id="srClearAll">Limpiar todos los filtros</button>
+                    </div>
+
+                    <!-- Pagination -->
+                    <div class="sr-pagination" id="srPagination" style="display:none">
+                        <button class="sr-page-btn" id="srPrevPage">&#8249; Anterior</button>
+                        <div class="sr-page-numbers" id="srPageNumbers"></div>
+                        <button class="sr-page-btn" id="srNextPage">Siguiente &#8250;</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recently Viewed -->
+        <section class="sr-recently-viewed" id="srRecentlyViewed" style="display:none">
+            <div class="container">
+                <h2 class="section-title">Vistos recientemente</h2>
+                <div class="sr-recently-carousel" id="srRecentlyCarousel"></div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer" id="footer"></footer>
+
+    <!-- Cart Sidebar -->
+    <div id="cartSidebar" class="cart-sidebar"></div>
+
+    <!-- Notifications Container -->
+    <div id="notificationsContainer" class="notifications-container"></div>
+
+    <!-- Scripts -->
+    <script src="../js/utils/constants.js"></script>
+    <script src="../js/utils/helpers.js"></script>
+    <script src="../js/services/auth.js"></script>
+    <script src="../js/services/cart.js"></script>
+    <script src="../js/services/products.js"></script>
+    <script src="../js/services/search.js"></script>
+    <script src="../js/components/navbar.js"></script>
+    <script src="../js/components/footer.js"></script>
+    <script src="../js/components/cart.js"></script>
+    <script src="../js/components/notifications.js"></script>
+    <script src="../js/components/search.js"></script>
+    <script src="../js/components/searchResults.js"></script>
+</body>
+</html>

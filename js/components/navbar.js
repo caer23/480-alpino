@@ -60,6 +60,7 @@ class NavbarComponent {
                     </nav>
                     <div class="nav-right">
                         <button class="action-btn" type="button">Vende</button>
+                        <button class="action-btn search-nav-btn" id="searchNavBtn" type="button" aria-label="Buscar productos" title="Buscar">🔍</button>
                         ${accountBtn}
                         <button class="action-btn cart-nav-btn" id="cartNavBtn" type="button" aria-label="Abrir carrito">
                             🛒 <span class="cart-nav-count" id="cartNavCount">0</span>
@@ -310,6 +311,14 @@ class NavbarComponent {
                 e.preventDefault();
                 e.stopPropagation();
                 this.toggleMobileMenu();
+            });
+        }
+
+        // Search button
+        const searchNavBtn = getElement('#searchNavBtn');
+        if (searchNavBtn) {
+            searchNavBtn.addEventListener('click', () => {
+                document.dispatchEvent(new CustomEvent('openSearch'));
             });
         }
 
