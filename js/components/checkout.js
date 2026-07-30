@@ -449,8 +449,8 @@ class CheckoutComponent {
                 return;
             }
 
-            const approvedStatus = payment.method === 'transfer' ? 'processing' : 'completed';
-            const paymentStatus = payment.method === 'transfer' ? 'pending' : 'approved';
+            const approvedStatus = 'processing';
+            const paymentStatus = 'pending';
 
             ordersService.updateOrderStatus(order.order_id, approvedStatus, {
                 status: paymentStatus,
@@ -459,13 +459,6 @@ class CheckoutComponent {
             });
 
             await emailService.sendOrderConfirmation(order);
-            if (paymentStatus === 'approved') {
-                await emailService.sendPaymentConfirmed({
-                    ...order,
-                    payment: { ...order.payment, status: paymentStatus, paid_at: new Date().toISOString() }
-                });
-            }
-
             carritoService.vaciar();
             window.location.href = `order-confirmation.html?order_id=${encodeURIComponent(order.order_id)}`;
         } catch (error) {
