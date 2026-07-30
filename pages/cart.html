@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrito - Cota 480</title>
+
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/cart.css">
+    <link rel="stylesheet" href="../styles/cart-page.css">
+</head>
+<body class="cart-page">
+<header class="cart-page-header">
+    <div class="container cart-page-header-inner">
+        <a href="../index.html" class="cart-page-brand">Cota 480</a>
+        <a href="../index.html" class="cart-page-continue-link">← Continuar comprando</a>
+    </div>
+</header>
+
+<main class="container cart-page-main">
+    <section class="cart-page-list-section">
+        <h1>Tu carrito</h1>
+        <div id="cartPageItems" class="cart-page-items"></div>
+    </section>
+
+    <aside class="cart-page-summary">
+        <h2>Resumen</h2>
+
+        <div class="cart-page-coupon">
+            <input type="text" id="cartPageCoupon" placeholder="Cupón de descuento" autocomplete="off">
+            <button id="cartPageApplyCoupon" type="button">Aplicar</button>
+        </div>
+        <p id="cartPageCouponFeedback" class="cart-page-coupon-feedback"></p>
+
+        <div class="cart-page-shipping-estimate">
+            <h3>Envío estimado</h3>
+            <ul>
+                <li><strong>Standard:</strong> 5-7 días · $1.500</li>
+                <li><strong>Express:</strong> 2-3 días · $3.500</li>
+                <li><strong>Mismo día (CABA):</strong> $5.000</li>
+            </ul>
+        </div>
+
+        <div class="cart-page-totals">
+            <div><span>Subtotal</span><strong id="cartPageSubtotal">$0</strong></div>
+            <div><span>IVA (21%)</span><strong id="cartPageTax">$0</strong></div>
+            <div id="cartPageDiscountRow" class="discount" style="display:none"><span id="cartPageDiscountLabel">Descuento</span><strong id="cartPageDiscount">-$0</strong></div>
+            <div><span>Envío estimado</span><strong>$1.500</strong></div>
+            <div class="total"><span>Total</span><strong id="cartPageTotal">$0</strong></div>
+        </div>
+
+        <button id="cartPageCheckout" class="cart-page-checkout" type="button">Proceder al checkout</button>
+        <a href="../index.html" class="cart-page-secondary-btn">Continuar comprando</a>
+    </aside>
+</main>
+
+<script src="../js/utils/constants.js"></script>
+<script src="../js/utils/helpers.js"></script>
+<script src="../js/services/cart.js"></script>
+<script src="../js/services/orders.js"></script>
+<script src="../js/components/cartPage.js"></script>
+</body>
+</html>
