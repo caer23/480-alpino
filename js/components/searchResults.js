@@ -3,6 +3,21 @@
  * Gestiona la página de búsqueda con filtros y paginación
  */
 
+/**
+ * Escapa caracteres HTML para prevenir XSS
+ * @param {string} str - Cadena a escapar
+ * @returns {string}
+ */
+function escapeHtml(str) {
+    if (typeof str !== 'string') return '';
+    return str
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+}
+
 class SearchResultsComponent {
     constructor() {
         this.allProducts = productosService.obtenerTodos();
@@ -337,9 +352,9 @@ class SearchResultsComponent {
         if (countEl) countEl.textContent = `(${tags.length})`;
 
         tagsEl.innerHTML = tags.map(tag => `
-            <span class="sr-filter-tag" data-key="${tag.key}" data-val="${tag.val || ''}">
-                ${tag.label}
-                <button class="sr-filter-tag-remove" data-key="${tag.key}" data-val="${tag.val || ''}">✕</button>
+            <span class="sr-filter-tag" data-key="${escapeHtml(tag.key)}" data-val="${escapeHtml(tag.val || '')}">
+                ${escapeHtml(tag.label)}
+                <button class="sr-filter-tag-remove" data-key="${escapeHtml(tag.key)}" data-val="${escapeHtml(tag.val || '')}">✕</button>
             </span>
         `).join('');
 
@@ -689,14 +704,14 @@ class SearchResultsComponent {
         }
 
         const historyHTML = history.map(h => `
-            <div class="sr-autocomplete-item" data-q="${h}">
-                <span class="sr-autocomplete-icon">🕐</span>${h}
+            <div class="sr-autocomplete-item" data-q="${escapeHtml(h)}">
+                <span class="sr-autocomplete-icon">🕐</span>${escapeHtml(h)}
             </div>
         `).join('');
 
         const resultsHTML = results.map(p => `
-            <div class="sr-autocomplete-item" data-q="${p.nombre}" data-id="${p.id}">
-                <span class="sr-autocomplete-icon">🔍</span>${p.nombre}
+            <div class="sr-autocomplete-item" data-q="${escapeHtml(p.nombre)}" data-id="${parseInt(p.id) || 0}">
+                <span class="sr-autocomplete-icon">🔍</span>${escapeHtml(p.nombre)}
             </div>
         `).join('');
 
